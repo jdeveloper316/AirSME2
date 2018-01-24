@@ -7,8 +7,9 @@ package com.airsme.datamodels;
 public abstract class Model {
 
     public abstract String getNode();
-    public abstract String getID();
-    public abstract void setID(String id);
+    public abstract String getPKeyValue();
+    public abstract String getPKeyName();
+    public abstract void setPKeyValue(String id);
     public boolean save(Model m){
 
         return true;

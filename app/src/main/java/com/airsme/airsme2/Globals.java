@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Globals {
 
     private static Context dummycontext;
+    private static boolean progressing=false;
 
     public static void setDummycontext(Context dummycontext) {
         Globals.dummycontext = dummycontext;
@@ -37,13 +38,25 @@ public class Globals {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    public static void nextView(Context c, Class intentt){
+        if(c.getClass()!=intentt) {
+            Intent intent = new Intent(c, intentt);
+            c.startActivity(intent);
+        }
+    }
     public static void showprogress(Context context){
-        BaseActivity.getObj().setContext(context);
-        BaseActivity.getObj().showProgressDialog();
+        if(!progressing) {
+            progressing = true;
+            BaseActivity.getObj().setContext(context);
+            BaseActivity.getObj().showProgressDialog();
+        }
     }
     public static void hideprogress(Context context){
-        BaseActivity.getObj().setContext(context);
-        BaseActivity.getObj().hideProgressDialog();
+        if(progressing){
+            BaseActivity.getObj().setContext(context);
+            BaseActivity.getObj().hideProgressDialog();
+            progressing=false;
+        }
     }
     static class BaseActivity extends AppCompatActivity {
         final static BaseActivity obj=new BaseActivity();
@@ -81,31 +94,7 @@ public class Globals {
         }
     }
 
-    //menu handling
 
-
-    public static boolean menuhandling(MenuItem item) {
-
-        switch(item.getItemId()) {
-        case R.id.add:
-            return(true);
-        case R.id.reset:
-            return(true);
-        case R.id.about:
-            return(true);
-        case R.id.exit:
-            logout(dummycontext);
-            return(true);
-
-    }
-    return false;
-    }
-
-    private static void logout(Context c) {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(c, LoginActivity.class);
-        c.startActivity(intent);
-    }
 
 }
 

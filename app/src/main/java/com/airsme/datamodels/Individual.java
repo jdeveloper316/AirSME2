@@ -6,6 +6,7 @@ package com.airsme.datamodels;
 
 public class Individual extends Model {
     private String ID;
+    private String uid;
     private String name;
     private String surname;
     private String position;
@@ -17,6 +18,21 @@ public class Individual extends Model {
     @Override
     public String getNode() {
         return "individual";
+    }
+
+    @Override
+    public String getPKeyValue() {
+        return email;
+    }
+
+    @Override
+    public String getPKeyName() {
+        return "email";
+    }
+
+    @Override
+    public void setPKeyValue(String id) {
+        this.email=id;
     }
 
     public Individual(String name, String surname, String position, String content, String email, String password, Business business) {
@@ -32,12 +48,11 @@ public class Individual extends Model {
     public Individual() {
     }
 
-    @Override
+
     public String getID() {
         return ID;
     }
 
-    @Override
     public void setID(String ID) {
         this.ID = ID;
     }

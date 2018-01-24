@@ -1,5 +1,6 @@
 package com.airsme.datamodels;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class Proxy extends Model {
     private String ID;
+    private String uid;
     private String pic;
     private String title;
     private String name;
@@ -24,9 +26,30 @@ public class Proxy extends Model {
     private List<String> skills;
     private List<String> qualifications;
 
+    private String contact;
+    private String email;
+    private String bankName;
+    private String address;
+    private Date dob;
+
     @Override
     public String getNode() {
         return "proxy";
+    }
+
+    @Override
+    public String getPKeyValue() {
+        return uid;
+    }
+
+    @Override
+    public String getPKeyName() {
+        return "uid";
+    }
+
+    @Override
+    public void setPKeyValue(String id) {
+        this.uid=id;
     }
 
     public Proxy(String title) {
@@ -57,12 +80,10 @@ public class Proxy extends Model {
         this.qualifications = qualifications;
     }
 
-    @Override
     public String getID() {
         return ID;
     }
 
-    @Override
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -185,5 +206,53 @@ public class Proxy extends Model {
 
     public void setQualifications(List<String> qualifications) {
         this.qualifications = qualifications;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 }

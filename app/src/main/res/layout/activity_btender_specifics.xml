@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:gravity="center_horizontal"
-android:orientation="vertical"
-android:paddingBottom="@dimen/activity_vertical_margin"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-tools:context="com.airsme.airsme2.BTenderSpecifics">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.airsme.airsme2.BTenderSpecifics">
 
 <ProgressBar
     android:id="@+id/login_progress"
@@ -30,18 +31,18 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/btender_imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:id="@+id/buildingname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Building name"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
 
             <AutoCompleteTextView
                 android:id="@+id/unit"
@@ -52,6 +53,12 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
                 android:maxLines="1"
                 android:singleLine="true" />
 
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <AutoCompleteTextView
                 android:id="@+id/floor"
                 android:layout_width="match_parent"
@@ -60,6 +67,12 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <AutoCompleteTextView
                 android:id="@+id/street"
@@ -70,6 +83,12 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
                 android:maxLines="1"
                 android:singleLine="true" />
 
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <AutoCompleteTextView
                 android:id="@+id/suburb"
                 android:layout_width="match_parent"
@@ -78,6 +97,12 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <AutoCompleteTextView
                 android:id="@+id/town"
@@ -95,10 +120,25 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
             android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/businessname"
+                android:id="@+id/tenderno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Business name"
+                android:hint="Tender Number"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/tendername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tender Name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
@@ -148,7 +188,7 @@ tools:context="com.airsme.airsme2.BTenderSpecifics">
 
 
         <Button
-            android:id="@+id/signupbtn"
+            android:id="@+id/tender_specsbtn"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

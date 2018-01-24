@@ -9,8 +9,9 @@ android:paddingBottom="@dimen/activity_vertical_margin"
 android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
-tools:context="com.airsme.airsme2.BIndividual">
+tools:context="com.airsme.airsme2.BSignup">
 
+<!-- Login progress -->
 <ProgressBar
     android:id="@+id/login_progress"
     style="?android:attr/progressBarStyleLarge"
@@ -25,7 +26,7 @@ tools:context="com.airsme.airsme2.BIndividual">
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/email_bsignup_form"
+        android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -33,12 +34,11 @@ tools:context="com.airsme.airsme2.BIndividual">
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <AutoCompleteTextView
-                android:id="@+id/bindividual_name"
+                android:id="@+id/bsignup_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="Company name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
@@ -48,12 +48,39 @@ tools:context="com.airsme.airsme2.BIndividual">
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <AutoCompleteTextView
-                android:id="@+id/bindividual_surname"
+                android:id="@+id/bsignup_regno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Surname"
+                android:hint="Registration number"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/bsignup_vatno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="VAT No."
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/bsignup_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Website"
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
@@ -65,50 +92,58 @@ tools:context="com.airsme.airsme2.BIndividual">
             android:layout_height="wrap_content">
 
             <Spinner
-                android:id="@+id/position"
+                android:id="@+id/bsignup_beelevel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:hint="BEE Level"
+                android:inputType="text"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/bindividual_contactno"
+            <AutoCompleteTextView
+                android:id="@+id/bsignup_taxclearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contact number"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="number"
+                android:hint="Tax clearance"
+                android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
-
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="24pt">
 
-            <EditText
-                android:id="@+id/bindividual_email"
+            <Spinner
+                android:id="@+id/bsignup_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
+                android:hint="Type"
+                android:inputType="text"
                 android:singleLine="true" />
-
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="24pt">
+
+            <Spinner
+                android:id="@+id/bsignup_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Size"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
 
 
         <Button
-            android:id="@+id/bindividualbtn"
+            android:id="@+id/bsignupbtn"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,6 +151,8 @@ tools:context="com.airsme.airsme2.BIndividual">
             android:text="Next"
             android:textStyle="bold" />
 
+
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
+

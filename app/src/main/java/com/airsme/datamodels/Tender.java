@@ -9,7 +9,7 @@ import java.util.Date;
 public class Tender extends Model {
     private String ID;
     private String tenderno;
-    private String businessname;
+    private String businessUid;
     private Date date;
     private String time;
     private String building;
@@ -21,16 +21,42 @@ public class Tender extends Model {
     private String contact;
     private String email;
 
+
+    private String status="Pending";
+    private String name="Tender name";
+
+
+    private String notes;
+    private String maplocation;
+    private String contactperson;
+    private String courierOptions;
+
     @Override
     public String getNode() {
         return "tender";
     }
 
-    public Tender(String tenderno, String businessname, Date date, String time, String building,
+    @Override
+    public String getPKeyValue() {
+        return ID;
+    }
+
+    @Override
+    public String getPKeyName() {
+        return "tenderno";
+    }
+
+    @Override
+    public void setPKeyValue(String id) {
+        this.ID=id;
+    }
+
+
+    public Tender(String tenderno, String businessUid, Date date, String time, String building,
                   String unit, String floor, String street, String surbub, String town,
                   String contact, String email) {
         this.tenderno = tenderno;
-        this.businessname = businessname;
+        this.businessUid = businessUid;
         this.date = date;
         this.time = time;
         this.building = building;
@@ -44,14 +70,16 @@ public class Tender extends Model {
     }
 
     public Tender() {
+        date=new Date();
     }
 
-    @Override
+    public String getImageURL() {
+        return "images/tender/"+getTenderno();
+    }
     public String getID() {
         return ID;
     }
 
-    @Override
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -64,12 +92,12 @@ public class Tender extends Model {
         this.tenderno = tenderno;
     }
 
-    public String getBusinessname() {
-        return businessname;
+    public String getBusinessUid() {
+        return businessUid;
     }
 
-    public void setBusinessname(String businessname) {
-        this.businessname = businessname;
+    public void setBusinessUid(String businessUid) {
+        this.businessUid = businessUid;
     }
 
     public Date getDate() {
@@ -150,5 +178,93 @@ public class Tender extends Model {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getMaplocation() {
+        return maplocation;
+    }
+
+    public void setMaplocation(String maplocation) {
+        this.maplocation = maplocation;
+    }
+
+    public String getContactperson() {
+        return contactperson;
+    }
+
+    public void setContactperson(String contactperson) {
+        this.contactperson = contactperson;
+    }
+
+    public String getCourierOptions() {
+        return courierOptions;
+    }
+
+    public void setCourierOptions(String courierOptions) {
+        this.courierOptions = courierOptions;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Tender{" +
+                "ID='" + ID + '\'' +
+                ", tenderno='" + tenderno + '\'' +
+                ", businessUid='" + businessUid + '\'' +
+                ", date=" + date +
+                ", time='" + time + '\'' +
+                ", building='" + building + '\'' +
+                ", unit='" + unit + '\'' +
+                ", floor='" + floor + '\'' +
+                ", street='" + street + '\'' +
+                ", surbub='" + surbub + '\'' +
+                ", town='" + town + '\'' +
+                ", contact='" + contact + '\'' +
+                ", email='" + email + '\'' +
+                ", notes='" + notes + '\'' +
+                ", maplocation='" + maplocation + '\'' +
+                ", contactperson='" + contactperson + '\'' +
+                ", courierOptions='" + courierOptions + '\'' +
+                '}';
+    }
+    public String toPrint() {
+        return  "tenderno='" + tenderno + '\'' +'\n'+
+                "date=" + date +'\n'+
+                "time='" + time + '\'' +'\n'+
+                "building='" + building + '\'' +'\n'+
+                "unit='" + unit + '\'' +'\n'+
+                "floor='" + floor + '\'' +'\n'+
+                "street='" + street + '\'' +'\n'+
+                "surbub='" + surbub + '\'' +'\n'+
+                "town='" + town + '\'' +'\n'+
+                "contact='" + contact + '\'' +'\n'+
+                "email='" + email + '\'' +'\n'+
+                "notes='" + notes + '\'' +'\n'+
+                "maplocation='" + maplocation + '\'' +'\n'+
+                "contactperson='" + contactperson + '\'' +'\n'+
+                "courierOptions='" + courierOptions + '\'';
     }
 }

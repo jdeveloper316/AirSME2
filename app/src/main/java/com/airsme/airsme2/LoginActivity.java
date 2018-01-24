@@ -37,6 +37,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 import android.content.Intent;
 import android.app.AlertDialog;
 
+import com.airsme.datamodels.JNavigate;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -125,6 +126,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+        TextView t=(TextView)findViewById(R.id.message);
+        t.setText("You're not logged in.");
+        t.setVisibility(View.VISIBLE);
 //signin button
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -356,7 +360,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mEmailView;
             cancel = true;
         }
-
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -375,6 +378,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 //Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
+                                //Globals.msgbox(LoginActivity.this, "ttttetstststtststsst");
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("TAG", "signInWithEmail:failure", task.getException());
@@ -557,25 +561,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     private void updateUI(FirebaseUser user) {
-        Globals.msgbox(this, "updateuistart "+(user==null?"  null":user.getUid()));
-        Globals.showprogress(this);
-        if (user != null) {
-            //find the roles from the database using uid
-            user.getUid();
-            //.........
-
-            //move to next
-            Globals.hideprogress(this);
-            Globals.msgbox(this, "ma1");
-            Intent intent = new Intent(this, BDashboard.class);
-            startActivity(intent);
-
-        } else {
-            TextView t=(TextView)findViewById(R.id.message);
-            t.setText("You're not logged in.");
-            t.setVisibility(View.VISIBLE);
-            Globals.hideprogress(this);
-        }
+        //Globals.msgbox(this, "updateuistart "+(user==null?"  null":user.getUid()));
+        JNavigate.overalldecider(this);
     }
     private void updateUI() {
         updateUI(FirebaseAuth.getInstance().getCurrentUser());

@@ -150,7 +150,9 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Spinner spinner = (Spinner) findViewById(R.id.account_type);
-                            writeNewUser(user.getUid(), (spinner.getSelectedItem().toString().equalsIgnoreCase(User.Role.PROXY.toString()))? User.Role.PROXY:User.Role.BUSINESS);
+                            writeNewUser(user.getUid(), (spinner.getSelectedItem().toString()
+                                    .equalsIgnoreCase(User.PROXY.toString()))?
+                                    User.PROXY:User.BUSINESS);
                             Intent intent = new Intent(ChooseSignUp.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
@@ -179,7 +181,7 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
     }
 
     // [START basic_write]
-    private void writeNewUser(String uid, User.Role role) {
+    private void writeNewUser(String uid, String role) {
         User user = new User(uid, role);
         DBUtil.createModel(user);
         Globals.msgbox(this, "user created!!");

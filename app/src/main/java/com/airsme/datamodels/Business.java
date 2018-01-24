@@ -1,5 +1,6 @@
 package com.airsme.datamodels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class Business extends Model {
     private String ID;
+    private String uid;
     private String name;
     private String regno;
     private String vatno;
@@ -17,12 +19,27 @@ public class Business extends Model {
     private String type;
     private String logo;
     private String size;
-    private List<Tender> tenders;
-    private List<Individual> individuals;
+    private List<Tender> appliedtenders;
+    //private List<Individual> individuals;
 
     @Override
     public String getNode() {
         return "business";
+    }
+
+    @Override
+    public String getPKeyValue() {
+        return uid;
+    }
+
+    @Override
+    public String getPKeyName() {
+        return "uid";
+    }
+
+    @Override
+    public void setPKeyValue(String id) {
+        this.uid=id;
     }
 
     public Business(String name, String regno, String vatno, String website, String beelevel,
@@ -37,19 +54,20 @@ public class Business extends Model {
         this.type = type;
         this.size = size;
         this.logo = logo;
-        this.tenders = tenders;
-        this.individuals = individuals;
+        //this.tenders = tenders;
+        //this.individuals = individuals;
     }
 
     public Business() {
+        //this.individuals = new ArrayList<>();
+        //this.tenders = new ArrayList<>();
+
     }
 
-    @Override
     public String getID() {
         return ID;
     }
 
-    @Override
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -64,6 +82,14 @@ public class Business extends Model {
 
     public String getRegno() {
         return regno;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public void setRegno(String regno) {
@@ -126,19 +152,11 @@ public class Business extends Model {
         this.logo = logo;
     }
 
-    public List<Tender> getTenders() {
-        return tenders;
+    public List<Tender> getAppliedtenders() {
+        return appliedtenders;
     }
 
-    public void setTenders(List<Tender> tenders) {
-        this.tenders = tenders;
-    }
-
-    public List<Individual> getIndividuals() {
-        return individuals;
-    }
-
-    public void setIndividuals(List<Individual> individuals) {
-        this.individuals = individuals;
+    public void setAppliedtenders(List<Tender> appliedtenders) {
+        this.appliedtenders = appliedtenders;
     }
 }

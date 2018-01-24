@@ -1,9 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.airsme.airsme2.BDashboard">
+    android:layout_height="wrap_content"
+    tools:context="com.airsme.airsme2.BDashboard"
+    android:orientation="vertical">
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:id="@+id/bdashboard_layout">
+
+       <!-- <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+        <LinearLayout
+            android:id="@+id/lotvs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tender Name"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/tvdays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Days left" />
+
+            <TextView
+                android:id="@+id/tvtatus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Status" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lobtns"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btninfor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infor" />
+            <Button
+                android:id="@+id/btnapply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply" />
+        </LinearLayout>-->
+    </LinearLayout>
+    </ScrollView>
+
+   <!-- <LinearLayout
+        android:id="@+id/loimageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+        <LinearLayout
+            android:id="@+id/lotvs1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvname1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tender Name"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/tvdays1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Days left" />
+
+            <TextView
+                android:id="@+id/tvtatus1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Status" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lobtns1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btninfor1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infor" />
+            <Button
+                android:id="@+id/btnapply1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply" />
+        </LinearLayout>
+    </LinearLayout>-->
+
+</LinearLayout>
