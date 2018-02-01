@@ -1,6 +1,10 @@
 package com.airsme.datamodels;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by user on 12/11/2017.
@@ -27,9 +31,12 @@ public class Tender extends Model {
 
 
     private String notes;
-    private String maplocation;
+    private String location;
     private String contactperson;
     private String courierOptions;
+
+
+    private List<String> interests=new ArrayList<>();
 
     @Override
     public String getNode() {
@@ -70,7 +77,7 @@ public class Tender extends Model {
     }
 
     public Tender() {
-        date=new Date();
+
     }
 
     public String getImageURL() {
@@ -82,6 +89,10 @@ public class Tender extends Model {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getUniqueLongTenderno() {
+        return ID+"/"+tenderno;
     }
 
     public String getTenderno() {
@@ -188,14 +199,6 @@ public class Tender extends Model {
         this.notes = notes;
     }
 
-    public String getMaplocation() {
-        return maplocation;
-    }
-
-    public void setMaplocation(String maplocation) {
-        this.maplocation = maplocation;
-    }
-
     public String getContactperson() {
         return contactperson;
     }
@@ -228,6 +231,36 @@ public class Tender extends Model {
         this.name = name;
     }
 
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void addInterest(String interest) {
+        if(!interests.contains(interest))
+        this.interests.add(interest);
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    public LatLng jgetMaplocation() {
+        String[] loc = location.replace("lat/lng: (", "").replace(")", "").split(",");
+        return new LatLng(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
+    }
+
+    public void jsetMaplocation(LatLng maplocation) {
+        this.location = maplocation.toString();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Tender{" +
@@ -245,7 +278,7 @@ public class Tender extends Model {
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
                 ", notes='" + notes + '\'' +
-                ", maplocation='" + maplocation + '\'' +
+                ", maplocation='" + location + '\'' +
                 ", contactperson='" + contactperson + '\'' +
                 ", courierOptions='" + courierOptions + '\'' +
                 '}';
@@ -263,7 +296,7 @@ public class Tender extends Model {
                 "contact='" + contact + '\'' +'\n'+
                 "email='" + email + '\'' +'\n'+
                 "notes='" + notes + '\'' +'\n'+
-                "maplocation='" + maplocation + '\'' +'\n'+
+                "maplocation='" + location + '\'' +'\n'+
                 "contactperson='" + contactperson + '\'' +'\n'+
                 "courierOptions='" + courierOptions + '\'';
     }

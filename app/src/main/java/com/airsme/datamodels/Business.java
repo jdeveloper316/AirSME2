@@ -1,5 +1,7 @@
 package com.airsme.datamodels;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class Business extends Model {
     private String type;
     private String logo;
     private String size;
-    private List<Tender> appliedtenders;
+
+    private String location;
+    private List<String> appliedtenders=new ArrayList<>();
     //private List<Individual> individuals;
 
     @Override
@@ -37,6 +41,9 @@ public class Business extends Model {
         return "uid";
     }
 
+    public String getNodePath() {
+        return "individual/"+getPKeyValue()+"/business";
+    }
     @Override
     public void setPKeyValue(String id) {
         this.uid=id;
@@ -152,11 +159,46 @@ public class Business extends Model {
         this.logo = logo;
     }
 
-    public List<Tender> getAppliedtenders() {
+    public List<String> getAppliedtenders() {
         return appliedtenders;
     }
 
-    public void setAppliedtenders(List<Tender> appliedtenders) {
+    public void setAppliedtenders(List<String> appliedtenders) {
         this.appliedtenders = appliedtenders;
+    }
+
+    public LatLng jgetMaplocation() {
+        String[] loc = location.replace("lat/lng: (", "").replace(")", "").split(",");
+        return new LatLng(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
+    }
+
+    public void jsetMaplocation(LatLng maplocation) {
+        this.location = maplocation.toString();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Business{" +
+                "ID='" + ID + '\'' +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", regno='" + regno + '\'' +
+                ", vatno='" + vatno + '\'' +
+                ", website='" + website + '\'' +
+                ", beelevel='" + beelevel + '\'' +
+                ", taxclearance='" + taxclearance + '\'' +
+                ", type='" + type + '\'' +
+                ", logo='" + logo + '\'' +
+                ", size='" + size + '\'' +
+                ", appliedtenders=" + appliedtenders +
+                '}';
     }
 }

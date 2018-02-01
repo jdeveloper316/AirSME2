@@ -6,20 +6,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airsme.datamodels.Tender;
 
-public class BTenderInfor extends AppCompatActivity {
+public class PTenderInfor extends AppCompatActivity {
     public static Tender tender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_btender_infor);
+        setContentView(R.layout.activity_ptender_infor);
 
-        final Tender ten=tender;
+        tender=BTenderInfor.tender;
         ((TextView) findViewById(R.id.btenderinfor_details)).setText(tender.toPrint());
         ((TextView) findViewById(R.id.btenderinfor_specialnotes)).setText(tender.getNotes());
 
@@ -27,41 +26,27 @@ public class BTenderInfor extends AppCompatActivity {
         ((Button) findViewById(R.id.btenderinfor_mapbtn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Globals.nextView(BTenderInfor.this, BDashboard.class);
+                //Globals.nextView(PTenderInfor.this, PDashboard.class);
             }
         });
-
-        ((Button) findViewById(R.id.bresponses_btn)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.bmessage_client_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BResponses.tender=ten;
-                Globals.nextView(BTenderInfor.this, BResponses.class);
+                Message.subject =tender;
+                Globals.nextView(PTenderInfor.this, Message.class);
             }
         });
-
-        Button delbtn = (Button) findViewById(R.id.bdeletetender_btn);
-        delbtn.setVisibility(View.INVISIBLE);
-        delbtn.setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.btender_checklist_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GlobalTender.deleteTender(BTenderInfor.this, tender);
+                PJobBoard.tender=tender;
+                Globals.nextView(PTenderInfor.this, PJobBoard.class);
             }
         });
-
-        Button donbtn = (Button) findViewById(R.id.bmarkasdone_btn);
-        donbtn.setVisibility(View.INVISIBLE);
-        donbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalTender.markAsDone(BTenderInfor.this, tender);
-            }
-        });
-
         ((Button) findViewById(R.id.btenderinfor_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Globals.nextView(BTenderInfor.this, BDashboard.class);
+                Globals.nextView(PTenderInfor.this, PDashboard.class);
             }
         });
 
@@ -72,13 +57,13 @@ public class BTenderInfor extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.btender_menu, menu);
+        getMenuInflater().inflate(R.menu.ptender_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(GlobalMenus.menuhandling(this, item, false)) return true;
+        if(GlobalMenus.menuhandling(this, item, true)) return true;
         return(super.onOptionsItemSelected(item));
     }
 }

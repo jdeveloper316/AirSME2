@@ -115,6 +115,50 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_date"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELECT DATE"
+                android:id="@+id/btn_date"
+                android:layout_alignBottom="@+id/in_date"
+                android:layout_toRightOf="@+id/in_date"
+                android:layout_toEndOf="@+id/in_date" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_time"
+                android:layout_below="@+id/in_date"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELECT TIME"
+                android:id="@+id/btn_time"
+                android:layout_below="@+id/btn_date"
+                android:layout_alignLeft="@+id/btn_date"
+                android:layout_alignStart="@+id/btn_date" />
+
+        </RelativeLayout>
+
+
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -188,12 +232,20 @@
 
 
         <Button
+            android:id="@+id/tender_lecationbtn"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Select map location"
+            android:textStyle="bold" />
+        <Button
             android:id="@+id/tender_specsbtn"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Verify location"
+            android:text="Post"
             android:textStyle="bold" />
 
     </LinearLayout>

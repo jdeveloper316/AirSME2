@@ -1,5 +1,8 @@
 package com.airsme.datamodels;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +34,8 @@ public class Proxy extends Model {
     private String bankName;
     private String address;
     private Date dob;
+    private String location;
+    private List<String> appliedtenders=new ArrayList<>();
 
     @Override
     public String getNode() {
@@ -254,5 +259,74 @@ public class Proxy extends Model {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public List<String> getAppliedtenders() {
+        return appliedtenders;
+    }
+
+    public void setAppliedtenders(List<String> appliedtenders) {
+        this.appliedtenders = appliedtenders;
+    }
+
+    public LatLng jgetMaplocation() {
+        String[] loc = location.replace("lat/lng: (", "").replace(")", "").split(",");
+        return new LatLng(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
+    }
+
+    public void jsetMaplocation(LatLng maplocation) {
+        this.location = maplocation.toString();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Proxy{" +
+               // "ID='" + ID + '\'' +"\n"+
+                // ", uid='" + uid + '\'' +"\n"+
+                //", pic='" + pic + '\'' +"\n"+
+                ", title='" + title + '\'' +"\n"+
+                ", name='" + name + '\'' +"\n"+
+                ", surname='" + surname + '\'' +"\n"+
+                ", education='" + education + '\'' +"\n"+
+                ", languages='" + languages + '\'' +"\n"+
+                ", transport='" + transport + '\'' +"\n"+
+                ", employmentstatus='" + employmentstatus + '\'' +"\n"+
+                ", aboutme='" + aboutme + '\'' +"\n"+
+                ", accountname='" + accountname + '\'' +"\n"+
+                ", accountnumber='" + accountnumber + '\'' +"\n"+
+                ", branchcode='" + branchcode + '\'' +"\n"+
+                ", profession='" + profession + '\'' +"\n"+
+                ", skills=" + skills +"\n"+
+                ", qualifications=" + qualifications +"\n"+
+                ", contact='" + contact + '\'' +"\n"+
+                //", email='" + email + '\'' +"\n"+
+                ", bankName='" + bankName + '\'' +"\n"+
+                ", address='" + address + '\'' +"\n"+
+                //", dob=" + dob +"\n"+
+                //", appliedtenders=" + appliedtenders +"\n"+
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Proxy proxy = (Proxy) o;
+
+        return uid.equals(proxy.uid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uid.hashCode();
     }
 }

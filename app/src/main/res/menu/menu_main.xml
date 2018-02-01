@@ -4,10 +4,17 @@
 
 
     <item
-        android:id="@+id/account"
-        android:icon="@android:drawable/ic_dialog_dialer"
+        android:id="@+id/messages"
+        android:icon="@android:drawable/ic_dialog_email"
         app:showAsAction="always"
-        android:title="Account"/>
+        android:title="Messages"/>
+
+
+    <item
+        android:id="@+id/account"
+        app:showAsAction="never"
+        android:title="Account">
+    </item>
 
     <item
         android:id="@+id/logout"

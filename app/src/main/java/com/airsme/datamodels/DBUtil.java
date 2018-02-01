@@ -40,6 +40,22 @@ public class DBUtil {
         mDatabase.updateChildren(childUpdates);
         return false;
     }
+    public static boolean createModel(Business model) {
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        mDatabase.child("individual").child(model.getPKeyValue()).child("business").setValue(model);
+        mDatabase.updateChildren(childUpdates);
+        return false;
+    }
+    public static boolean createModel(Messeges model) {
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        mDatabase.child(model.getNode()).setValue(model);
+        mDatabase.updateChildren(childUpdates);
+        return false;
+    }
 
     public static boolean createModel(Model model) {
         //String key = mDatabase.child(model.getNode()).push().getKey();
@@ -109,14 +125,55 @@ public class DBUtil {
         return true;
     }
 
-    public static void retriaveModelByKey(final Model m, ValueEventListener cl) {
+    public static void retriaveModelByKey(final Model m, ValueEventListener cl, boolean... keeplistenig) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dinosaursRef = database.getReference(m.getNode()).child(m.getPKeyValue());
         if(m instanceof Tender){
             dinosaursRef=dinosaursRef.child(((Tender) m).getTenderno());
         }
+        if(keeplistenig.length>0&&keeplistenig[0]){
+            dinosaursRef.orderByChild(m.getPKeyValue()).addValueEventListener(cl);
 
-        dinosaursRef.orderByChild(m.getPKeyValue()).addListenerForSingleValueEvent(cl);
+        }
+
+        else {
+            dinosaursRef.orderByChild(m.getPKeyValue()).addListenerForSingleValueEvent(cl);
+
+        }
+
+    }
+
+    public static void retriaveModelByKey(final Messeges m, ValueEventListener cl, boolean... keeplistenig) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dinosaursRef = database.getReference(m.getNode());
+
+
+
+        if(keeplistenig.length>0&&keeplistenig[0]){
+            dinosaursRef.addValueEventListener(cl);
+
+        }
+
+        else {
+            dinosaursRef.addListenerForSingleValueEvent(cl);
+
+        }
+
+    }
+
+    public static void retriaveModelByKey(final Business m, ValueEventListener cl) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dinosaursRef = database.getReference();
+
+        dinosaursRef.child(m.getNodePath()).addListenerForSingleValueEvent(cl);
+
+    }
+
+    public static void retriaveTendersByBusiness(final Business m, ValueEventListener cl) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dinosaursRef = database.getReference();
+
+        dinosaursRef.child(m.getNodePath()).addListenerForSingleValueEvent(cl);
 
     }
 
@@ -130,7 +187,7 @@ public class DBUtil {
 
         return true;
     }
-
+/*
     public static boolean updateModel(Model model) {
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -145,9 +202,16 @@ public class DBUtil {
         mDatabase.updateChildren(childUpdates);
         return true;
     }
+*/
+public static boolean deleteModel(Model model) {
 
-    public static boolean deleteModel(Model model) {
+    return true;
+}
+public static boolean deleteNode(String node) {
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dinosaursRef = database.getReference();
 
-        return true;
+    dinosaursRef.child(node).removeValue();
+    return true;
     }
 }

@@ -35,6 +35,8 @@ public class BIndividual extends AppCompatActivity {
             }
         });
 
+
+
     }
     private void addspinners(){
 

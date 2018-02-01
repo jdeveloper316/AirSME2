@@ -6,32 +6,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.airsme.datamodels.DBUtil;
-import com.airsme.datamodels.ListenerMgr;
 import com.airsme.datamodels.Proxy;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
+import com.airsme.datamodels.Tender;
 
-public class PDashboard extends AppCompatActivity {
+public class BResponses extends AppCompatActivity {
+    static Tender tender;
+    static Proxy proxy;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pdashboard);
+        setContentView(R.layout.activity_bresponses);
         Globals.setDummycontext(this);
-        new GlobalTender(this, (LinearLayout)findViewById(R.id.pdashboard_layout), true).listenToAllTenders();
 
+        new GlobalProxy(this, (LinearLayout)findViewById(R.id.bresponses_layout), tender).listenResponses(tender);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.ptender_menu, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.btender_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(GlobalMenus.menuhandling(this, item, true, (LinearLayout)findViewById(R.id.pdashboard_layout))) return true;
+        if(GlobalMenus.menuhandling(this, item, false, (LinearLayout)findViewById(R.id.bdashboard_layout))) return true;
         return(super.onOptionsItemSelected(item));
     }
 

@@ -11,16 +11,32 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.airsme.datamodels.Business;
+import com.airsme.datamodels.DBUtil;
+import com.airsme.datamodels.ListenerMgr;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+
 import java.io.IOException;
 
 public class BDashboard extends AppCompatActivity {
+    static Business business;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bdashboard);
         Globals.setDummycontext(this);
-        new GlobalTender(this, (LinearLayout)findViewById(R.id.bdashboard_layout)).listenToAllTenders();
+        business=new Business();
+        business.setPKeyValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DBUtil.retriaveModelByKey(business, new ListenerMgr(){
+
+            @Override
+            public void methodHolder(DataSnapshot dataSnapshot) {
+                business=dataSnapshot.getValue(Business.class);
+            }
+        }.onchangeListener());
+        new GlobalTender(this, (LinearLayout)findViewById(R.id.bdashboard_layout), false).listenMyBTenders();
     }
 
     @Override
@@ -32,7 +48,7 @@ public class BDashboard extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(GlobalMenus.menuhandling(this, item, (LinearLayout)findViewById(R.id.bdashboard_layout))) return true;
+        if(GlobalMenus.menuhandling(this, item, false, (LinearLayout)findViewById(R.id.bdashboard_layout))) return true;
         return(super.onOptionsItemSelected(item));
     }
 

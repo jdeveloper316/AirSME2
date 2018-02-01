@@ -19,6 +19,12 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <!--
+             The API key for Google Maps-based APIs.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".LoginActivity"
@@ -46,11 +52,15 @@
         <activity android:name=".PReminder" />
         <activity android:name=".PCantAttend" />
         <activity android:name=".BPending" />
-        <activity android:name=".BProxyList" />
+        <activity android:name=".ChatList" />
         <activity android:name=".BProxyInfor" />
         <activity android:name=".BPayProxy" />
         <activity android:name=".BPushNotification" />
-        <activity android:name=".BTenderInfor"></activity>
+        <activity android:name=".BTenderInfor" />
+        <activity android:name=".PTenderInfor" />
+        <activity android:name=".BResponses" />
+        <activity android:name=".Message"></activity>
+        <activity android:name=".MapsMarkerActivity"></activity>
     </application>
 
 </manifest>

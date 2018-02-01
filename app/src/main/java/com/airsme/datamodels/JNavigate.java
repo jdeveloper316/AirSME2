@@ -33,10 +33,9 @@ public class JNavigate {
         FirebaseUser cuser= FirebaseAuth.getInstance().getCurrentUser();
         User user=new User();
         if(USER != null){//if authenticated
-            System.out.println("yeeeeeeeeeeeeeeeeeeeeeeeeeeeeees1yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ");
 
             USER.setRegistered(true);
-                    DBUtil.updateModel(USER);
+            DBUtil.createModel(USER);
         }
         else{//else login
             login(context);
@@ -54,13 +53,12 @@ public class JNavigate {
                 @Override
                 public void methodHolder(DataSnapshot dataSnapshot) {
                     User u = dataSnapshot.getValue(User.class);
+                    Globals.CURRENT_USER=u;
                     if(u==null)return;
-                    System.out.println(dataSnapshot.getKey()+"uuuuuuuuuuuuuuuuuuuuuuuuuusssssssssssssssssssssssseeee" +u);
                     USER=u;
-                    System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuusssssssssssssssssssssssseeee" +
-                            "eeeeeeeeeeeeeeeerrrrrrrrr "+u.toString());
                     if(u.isRegistered()){
-                        if(u.getRoles()==User.PROXY){
+
+                        if(User.PROXY.equalsIgnoreCase(u.getRoles())){
                             Globals.nextView(context, PDashboard.class);
                         }
                         else{

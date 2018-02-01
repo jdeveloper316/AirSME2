@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.airsme.airsme2.BProxyInfor">
+    tools:context="com.airsme.airsme2.PTenderInfor">
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -34,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/bproxy_infor_text"
+                    android:id="@+id/btenderinfor_details"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:hint="Special notes"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
@@ -44,15 +44,54 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/bproxy_infor_paymentbtn"
+                android:id="@+id/btenderinfor_mapbtn"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Make Payment"
+                android:text="View Map"
+                android:textStyle="bold" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/btenderinfor_specialnotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Special notes"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/bmessage_client_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Message Client"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btender_checklist_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Go to checklist"
+                android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btenderinfor_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Done"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,11 +1,8 @@
 package com.airsme.airsme2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.design.widget.TextInputEditText;
 import android.text.DynamicLayout;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,28 +10,35 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.airsme.datamodels.Business;
 import com.airsme.datamodels.DBUtil;
 import com.airsme.datamodels.JNavigate;
 import com.airsme.datamodels.ListenerMgr;
+import com.airsme.datamodels.Messeges;
+import com.airsme.datamodels.Proxy;
 import com.airsme.datamodels.Tender;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by M91p-04 on 1/19/2018.
  */
 
-public class GlobalTender {
+class GlobalTender {
 
     DynamicLayout dynamicLayout;
-    Context context;
+    private Context context;
     LinearLayout layout;
 
     private boolean pending=false;
+    private boolean isProxy=false;
 
-    ListenerMgr listenerMgr=new ListenerMgr() {
+
+    private ListenerMgr listenerMgr=new ListenerMgr() {
         @Override
         public void methodHolder(DataSnapshot dataSnapshot) {
             for(DataSnapshot ds:dataSnapshot.getChildren()){
@@ -43,9 +47,6 @@ public class GlobalTender {
                     public void methodHolder(DataSnapshot dataSnapshot) {
                         Tender tender=dataSnapshot.getValue(Tender.class);
                         if(tender!=null && tender.getTenderno()!=null){
-                            if(!pending)
-                                handle(tender);
-                            else if(tender.getStatus().equalsIgnoreCase("Pending"))
                                 handle(tender);
                         }
                     }
@@ -54,36 +55,115 @@ public class GlobalTender {
             }
         }
     };
+    private ListenerMgr listenerMgrMyTender=new ListenerMgr() {
+        @Override
+                    public void methodHolder(DataSnapshot dataSnapshot) {
+                        Tender tender=dataSnapshot.getValue(Tender.class);
+                        if(tender!=null && tender.getTenderno()!=null){
+                                handle(tender);
+                        }
+                    }
+    };
 
-    ListenerMgr alllistenerMgr=new ListenerMgr() {
+    private ListenerMgr alllistenerMgr=new ListenerMgr() {
         @Override
         public void methodHolder(DataSnapshot dataSnapshot) {
+
+
             for(DataSnapshot ds:dataSnapshot.getChildren()){
+
                 dataSnapshot.child(ds.getKey()).getRef().addValueEventListener(listenerMgr.onchangeListener());
             }
         }
     };
 
-    public GlobalTender(Context context, LinearLayout layout) {
+    private ListenerMgr plistenerMgr=new ListenerMgr() {
+        @Override
+        public void methodHolder(DataSnapshot dataSnapshot) {
+            for(DataSnapshot ds:dataSnapshot.getChildren()){
+                //for(String tenderno:buz.getAppliedtenders()){
+                ListenerMgr lm=new ListenerMgr() {
+                    @Override
+                    public void methodHolder(DataSnapshot dataSnapshot) {
+                        Tender tender=dataSnapshot.getValue(Tender.class);
+                        if(tender!=null && tender.getTenderno()!=null){
+                            handle(tender);
+                        }
+                    }
+                };
+                dataSnapshot.child(ds.getKey()).getRef().equalTo(dataSnapshot.getRef().getRoot().child(buz.getNodePath())
+                        .child("appliedtenders").getKey()).addValueEventListener(lm.onchangeListener());
+            //}
+            }
+        }
+    };
+
+    private Business buz;
+    private ListenerMgr palllistenerMgr=new ListenerMgr() {
+        @Override
+        public void methodHolder(DataSnapshot dataSnapshot) {
+            for(DataSnapshot ds:dataSnapshot.getChildren()){
+                dataSnapshot.child(ds.getKey()).getRef().addValueEventListener(plistenerMgr.onchangeListener());
+            }
+        }
+    };
+
+    public GlobalTender(Context context, LinearLayout layout, boolean isProxy) {
+        this.isProxy = isProxy;
         this.context = context;
         this.layout = layout;
+
+        if(Globals.CURRENT_PROXY==null) {
+            Globals.CURRENT_PROXY =new Proxy();
+            Globals.CURRENT_PROXY.setPKeyValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            DBUtil.retriaveModelByKey(Globals.CURRENT_PROXY, new ListenerMgr() {
+                @Override
+                public void methodHolder(DataSnapshot dataSnapshot) {
+                    Globals.CURRENT_PROXY =dataSnapshot.getValue(Proxy.class);
+                }
+            }.onchangeListener(), true);
+        }
+
         layout.removeAllViewsInLayout();
     }
 
     public void listenToAllTenders(){
         pending=false;
         DBUtil.listenToNode(alllistenerMgr, "tender");
+
     }
 
-    public void listenToAppliedTenders(){
+    public void listenToAppliedTenders(Business b){
+        this.buz=b;
         pending=false;
-        DBUtil.listenToNode(alllistenerMgr, "tender");
+        DBUtil.listenToNode(palllistenerMgr, "tender");
     }
 
-    public void listenToPendingTenders(){
-        pending=true;
-        DBUtil.listenToNode(listenerMgr, "tender/"+ JNavigate.USER.getUid());
+    public void listenMyTenders(){
+        pending=false;
+        DBUtil.listenToNode(new ListenerMgr() {
+            @Override
+            public void methodHolder(DataSnapshot dataSnapshot) {
+                Proxy p=dataSnapshot.getValue(Proxy.class);
+                if(p==null)return;
+                for(String tenderno:p.getAppliedtenders()){
+                    DBUtil.listenToNode(listenerMgrMyTender, "tender/"+tenderno);
+                }
+            }}, "proxy/"+ JNavigate.USER.getUid());
     }
+
+    public void listenMyBTenders(){
+        pending=false;
+        DBUtil.listenToNode(new ListenerMgr() {
+            @Override
+            public void methodHolder(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot tndrno:dataSnapshot.getChildren()){
+                    tndrno.getRef().addValueEventListener(listenerMgrMyTender.onchangeListener());
+                }
+            }}, "tender/"+ JNavigate.USER.getUid());
+    }
+
     public void handle(final Tender... tenders) {
         for(Tender t:tenders){
             final Tender tender=t;
@@ -93,11 +173,14 @@ public class GlobalTender {
                 @Override
                 public void onClick(View view) {
                     BTenderInfor.tender = tender;
-                    Globals.nextView(context, BTenderInfor.class);
+                    if(isProxy)
+                        Globals.nextView(context, PTenderInfor.class);
+                    else
+                        Globals.nextView(context, BTenderInfor.class);
                 }
             });
 
-            Button applybtn = new Button(context);
+            final Button applybtn = new Button(context);
             if(FirebaseAuth.getInstance().getCurrentUser().getUid().equalsIgnoreCase(tender.getPKeyValue())) {
                 applybtn.setText("Edit");
                 applybtn.setOnClickListener(new View.OnClickListener() {
@@ -110,10 +193,25 @@ public class GlobalTender {
             }
             else{
                 applybtn.setText("Apply");
+                if(Globals.CURRENT_PROXY.getAppliedtenders().contains(tender.getUniqueLongTenderno())){
+                    applybtn.setEnabled(false);
+                }
+                else{
+                    applybtn.setEnabled(true);
+                }
                 applybtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Globals.msgbox(context, "Application sent!");
+                        applyTender(tender);
+                        applybtn.setEnabled(false);
+                        //likeTender(tender, applybtn.getText().toString().equalsIgnoreCase("Like"));
+                        //if(Globals.CURRENT_PROXY.getAppliedtenders().contains(tender.getUniqueLongTenderno())){
+                        //    applybtn.setEnabled(false);
+                       // }
+                       // else{
+                       //     applybtn.setEnabled(true);
+                       // }
+                        //Globals.msgbox(context, "Added to your interested tender list!");
                     }
                 });
             }
@@ -199,5 +297,38 @@ public class GlobalTender {
             layout.addView(lastlayout, matchwrap);
             layout = lastlayout;
         }
+    }
+
+    public void applyTender(final Tender t){
+        DBUtil.deleteNode("proxy/"+Globals.CURRENT_USER.getUid()+"/appliedtenders/"+t.getUniqueLongTenderno());
+        final Proxy b = new Proxy();
+        b.setPKeyValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DBUtil.retriaveModelByKey(b, new ListenerMgr(){
+
+            @Override
+            public void methodHolder(DataSnapshot dataSnapshot) {
+
+                t.addInterest(Globals.CURRENT_USER.getUid());
+                DBUtil.createModel(t);
+
+
+                Proxy bz=dataSnapshot.getValue(Proxy.class);
+                bz.getAppliedtenders().add(t.getUniqueLongTenderno());
+                bz.setAppliedtenders(new ArrayList<String>(new HashSet<>(bz.getAppliedtenders())));
+                DBUtil.createModel(bz);
+
+                Messeges messeges=new Messeges(t, Globals.CURRENT_USER.getUid());
+                messeges.addMessege(Globals.CURRENT_USER.getUid(), t.getPKeyValue(),
+                        "Hi, I'm writting to show interest applying for this tender.");
+                DBUtil.createModel(messeges);
+
+            }
+        }.onchangeListener());
+    }
+
+    public static void markAsDone(Context context, Tender tender) {
+    }
+
+    public static void deleteTender(Context context, Tender tender) {
     }
 }

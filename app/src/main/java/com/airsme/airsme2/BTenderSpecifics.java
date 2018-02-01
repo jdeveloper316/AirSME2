@@ -1,35 +1,41 @@
 package com.airsme.airsme2;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.airsme.datamodels.DBUtil;
-import com.airsme.datamodels.JNavigate;
 import com.airsme.datamodels.Tender;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
-public class BTenderSpecifics extends AppCompatActivity {
+public class BTenderSpecifics extends AppCompatActivity implements
+        View.OnClickListener  {
+    Button btnDatePicker, btnTimePicker;
+    EditText txtDate, txtTime;
+    private int mYear, mMonth, mDay, mHour, mMinute;
+    Calendar calendar=Calendar.getInstance();
+
+
     static Tender tender;
     Spinner courieroptions;
     // Spinner Drop down elements
@@ -47,6 +53,15 @@ public class BTenderSpecifics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_btender_specifics);
         addspinners();
+
+        imageView=findViewById(R.id.btender_imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImage();
+
+            }
+        });
         if(tender!=null) {
             ((TextView) findViewById(R.id.unit)).setText(tender.getUnit());
             ((TextView) findViewById(R.id.floor)).setText(tender.getFloor());
@@ -60,19 +75,20 @@ public class BTenderSpecifics extends AppCompatActivity {
             ((TextView) findViewById(R.id.specialnotes)).setText(tender.getNotes());
             courieroptions.setSelection(beelevels.indexOf(tender.getCourierOptions()));
 
-            imageView=findViewById(R.id.btender_imageView);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    chooseImage();
-
-                }
-            });
-
             new GlobalStorage(this).loadImage(tender.getImageURL(), imageView);
 
-
         }
+        else
+            tender=new Tender();
+        Button chooselocation = (Button) findViewById(R.id.tender_lecationbtn);
+        chooselocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Globals.showMapLocation(BTenderSpecifics.this, tender);
+                //tender.jsetMaplocation();
+            }
+        });
+
         Button submitbtn = (Button) findViewById(R.id.tender_specsbtn);
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +97,90 @@ public class BTenderSpecifics extends AppCompatActivity {
             }
         });
 
+
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        txtDate=(EditText)findViewById(R.id.in_date);
+        txtDate.setEnabled(false);
+        txtTime=(EditText)findViewById(R.id.in_time);
+        txtTime.setEnabled(false);
+
+        btnDatePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(this);
+
+
+        olddate();
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == btnDatePicker) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            calendar.set(Calendar.YEAR, year);
+                            calendar.set(Calendar.MONTH, monthOfYear);
+                            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+
+                            calendar.set(Calendar.MINUTE, minute);
+                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+    }
+    public void olddate() {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            c.setTime(tender.getDate());
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+
+            txtDate.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
+
+            txtTime.setText(mHour + ":" + mMinute);
+    }
+
     private void addspinners(){
 
         courieroptions = (Spinner) findViewById(R.id.courieroption);
@@ -178,8 +277,14 @@ public class BTenderSpecifics extends AppCompatActivity {
             tender.setNotes(notes.getText().toString());
         }
 
+        if(tender.jgetMaplocation()==null){
+            Toast.makeText(this, "Please choose map location", Toast.LENGTH_SHORT);
+            return;
+        }
+
         tender.setCourierOptions(courieroptions.getSelectedItem().toString());
 
+        tender.setDate(calendar.getTime());
 
         tender.setPKeyValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -188,6 +293,7 @@ public class BTenderSpecifics extends AppCompatActivity {
 
 
         Globals.nextView(this, BDashboard.class);
+        tender=null;
     }
 
     private void chooseImage() {

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">AirSME</string>
 
+
+    <string name="google_maps_key">AIzaSyB46r_qQgdH2CQlor4ksDVLoOh9MapD1js</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

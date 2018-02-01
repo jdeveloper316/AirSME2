@@ -68,7 +68,7 @@ public class GlobalStorage {
     }
 
 public void loadImage(final String url, final ImageView imageView) {
-
+    if(url==null||url=="")return;
     StorageReference load = FirebaseStorage.getInstance().getReference()
             .child(url);
     load.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

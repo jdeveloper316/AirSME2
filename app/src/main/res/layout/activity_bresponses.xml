@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.airsme.airsme2.PDashboard"
+    tools:context="com.airsme.airsme2.BResponses"
     android:orientation="vertical">
     <ScrollView
         android:id="@+id/login_form"
@@ -16,12 +16,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:id="@+id/pdashboard_layout">
+            android:id="@+id/bresponses_layout">
 
 
         </LinearLayout>
     </ScrollView>
 
-
-
-</LinearLayout>
+   </LinearLayout>

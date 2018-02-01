@@ -49,7 +49,7 @@ tools:context="com.airsme.airsme2.BTenderInfor">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="View Map"
+            android:text="View Location"
             android:textStyle="bold" />
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -65,6 +65,33 @@ tools:context="com.airsme.airsme2.BTenderInfor">
                 android:inputType="textMultiLine" />
 
         </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/bresponses_btn"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Responses"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bdeletetender_btn"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Delete"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bmarkasdone_btn"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Mark as done"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btenderinfor_btn"

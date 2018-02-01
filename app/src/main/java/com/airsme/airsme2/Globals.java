@@ -1,5 +1,6 @@
 package com.airsme.airsme2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airsme.datamodels.Model;
+import com.airsme.datamodels.Proxy;
+import com.airsme.datamodels.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -18,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class Globals {
+    public static Proxy CURRENT_PROXY =null;
+    public static User CURRENT_USER =null;
 
     private static Context dummycontext;
     private static boolean progressing=false;
@@ -42,6 +48,14 @@ public class Globals {
         if(c.getClass()!=intentt) {
             Intent intent = new Intent(c, intentt);
             c.startActivity(intent);
+        }
+    }
+    public static void showMapLocation(Activity c, Model model){
+        Class intentt=MapsMarkerActivity.class;
+        MapsMarkerActivity.model=model;
+        if(c.getClass()!=intentt) {
+            Intent intent = new Intent(c, intentt);
+            c.startActivityForResult(intent, 1);
         }
     }
     public static void showprogress(Context context){
