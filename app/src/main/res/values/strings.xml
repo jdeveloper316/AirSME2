@@ -107,4 +107,8 @@ Cras auctor porttitor ipsum non aliquam. Curabitur porttitor dui at tortor fring
 Praesent purus metus, viverra non quam suscipit, finibus tempus odio. Nulla quis pretium magna. Praesent mollis risus vel bibendum hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas vel leo eget nisl placerat lobortis vitae at metus. Aenean tincidunt, ex nec iaculis vestibulum, felis nisl rutrum ante, et vestibulum tortor velit ac massa. Nam at elementum neque, id hendrerit lectus.
     </string>
 
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

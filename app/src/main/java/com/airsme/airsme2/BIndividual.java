@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.airsme.datamodels.Business;
 import com.airsme.datamodels.DBUtil;
@@ -37,13 +39,16 @@ public class BIndividual extends AppCompatActivity {
 
 
 
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bind_main));
+        getSupportActionBar().hide();
+
     }
     private void addspinners(){
 
         position = (Spinner) findViewById(R.id.position);
 
         // Spinner Drop down elements
-        List<String> beelevels = Arrays.asList("bee1", "bee2", "bee3", "bee4");
+        List<String> beelevels = Arrays.asList("--BEE Level--", "1", "2", "3", "4", "5", "6", "7", "8");
 
 
         // Creating adapter for spinner
@@ -93,7 +98,14 @@ public class BIndividual extends AppCompatActivity {
             individual.setEmail(email.getText().toString());
         }
 
-        individual.setPosition(position.getSelectedItem().toString());
+        if(position.getSelectedItem().toString().contains("-")){
+            Toast.makeText(this, "Please select BEE Level", Toast.LENGTH_SHORT);
+            return;
+        }
+        else{
+            individual.setPosition(position.getSelectedItem().toString());
+        }
+
 
         //business.getIndividuals().add(individual);
 

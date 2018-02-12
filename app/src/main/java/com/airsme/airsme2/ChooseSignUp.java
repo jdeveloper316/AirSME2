@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +60,11 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email_choose_signup);
         populateAutoComplete();
 
-        Spinner spinner = (Spinner) findViewById(R.id.account_type);
+       spinner = (Spinner) findViewById(R.id.account_type);
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
+        categories.add("Choose one");
         categories.add("Business");
         categories.add("Proxy");
 
@@ -76,7 +79,7 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
 
 
         mPasswordView = (EditText) findViewById(R.id.password_choose_signup);
-       mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
@@ -94,6 +97,9 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
                 attemptSignup();
             }
         });
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.signup_main));
+        getSupportActionBar().hide();
     }
 
     private void populateAutoComplete() {
@@ -130,6 +136,7 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
         String email=((EditText) findViewById(R.id.email_choose_signup)).getText().toString();
         String pwd=((EditText) findViewById(R.id.password_choose_signup)).getText().toString();
         String pwd2=((EditText) findViewById(R.id.password2_choose_signup)).getText().toString();
+
         if(validateForm(email, pwd, pwd2))
         createAccount(email,pwd);
     }
@@ -149,7 +156,6 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Spinner spinner = (Spinner) findViewById(R.id.account_type);
                             writeNewUser(user.getUid(), (spinner.getSelectedItem().toString()
                                     .equalsIgnoreCase(User.PROXY.toString()))?
                                     User.PROXY:User.BUSINESS);
@@ -174,6 +180,10 @@ public class ChooseSignUp extends AppCompatActivity  implements LoaderManager.Lo
 
 
     private boolean validateForm(String email, String pwd, String pwd2) {
+        if(spinner.getSelectedItem().toString()
+                .equalsIgnoreCase("Choose one")){
+            Toast.makeText(this, "Please choose user type!", Toast.LENGTH_LONG);
+            return false;}
         if(!pwd.equals(pwd2)){ mPasswordView.setError("Password mismatch");return false;}
         if(pwd.length()<6) {mPasswordView.setError("Password too short");return false;}
         if(!email.contains("@")){ mEmailView.setError("Invalid email");return false;}

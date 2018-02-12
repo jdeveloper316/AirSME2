@@ -1,10 +1,16 @@
 package com.airsme.airsme2;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.airsme.datamodels.Business;
 import com.airsme.datamodels.Model;
@@ -14,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -28,11 +35,26 @@ public class MapsMarkerActivity extends AppCompatActivity
     public static Model model;
     GoogleMap mMap;
     LatLng latLng;
+    boolean showonly = false;
+    private String locationtitle;
+    static LatLng latLngs;
+    static boolean showonlys = false;
+    public static String locationtitles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+
+        latLng=latLng;
+        showonly=showonlys;
+        locationtitle=locationtitles;
+
+
+        MapsMarkerActivity.latLngs=null;
+        MapsMarkerActivity.showonlys=false;
+        MapsMarkerActivity.locationtitles=null;
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,20 +65,25 @@ public class MapsMarkerActivity extends AppCompatActivity
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(model instanceof Tender){
-                    ((Tender)model).jsetMaplocation(latLng);
-                }
-                if(model instanceof Proxy){
-                    ((Proxy)model).jsetMaplocation(latLng);
-                }
-                if(model instanceof Business){
-                    ((Business)model).jsetMaplocation(latLng);
+                if (!showonly) {
+                    if (model instanceof Tender) {
+                        ((Tender) model).jsetMaplocation(latLng);
+                    }
+                    if (model instanceof Proxy) {
+                        ((Proxy) model).jsetMaplocation(latLng);
+                    }
+                    if (model instanceof Business) {
+                        ((Business) model).jsetMaplocation(latLng);
+                    }
                 }
                 finishActivity(1);
                 onBackPressed();
-                }
-            });
-        }
+            }
+        });
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.maps_main));
+        getSupportActionBar().hide();
+    }
 
     /**
      * Manipulates the map when it's available.
@@ -70,15 +97,45 @@ public class MapsMarkerActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        mMap=googleMap;
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        mark(sydney, "Sydney", true);
+        mMap = googleMap;
+
+        if (showonly && latLng != null)
+            mark(latLng, "", true);
+        else {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                // mark(latLng, "", true);
+                LatLng sydney = new LatLng(-33.9238445,18.4244628);
+                mark(sydney, "Cape Town", true);
+
+            }
+            else {
+                googleMap.setMyLocationEnabled(true);
+                Location myLocation = googleMap.getMyLocation();  //Nullpointer exception.........
+                LatLng myLatLng = new LatLng(myLocation.getLatitude(),
+                        myLocation.getLongitude());
+
+                CameraPosition myPosition = new CameraPosition.Builder()
+                        .target(myLatLng).zoom(17).bearing(90).tilt(30).build();
+                googleMap.animateCamera(
+                        CameraUpdateFactory.newCameraPosition(myPosition));
+            }
+        }
 
 
+        if(!showonly)
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                mark(latLng, "", false);
+                mark(latLng, locationtitle, false);
             }
         });
     }
@@ -114,10 +171,14 @@ public static final double PRICE_PER_KM=5;
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return Radius * c;
+        double r=Radius * c;
+        return Math.round((r) * 10) / 10.0;
+
+
     }
     public static double calculateCost(LatLng StartP, LatLng EndP) {
 
-        return calculationByDistance(StartP, EndP) * PRICE_PER_KM;
+        double r= calculationByDistance(StartP, EndP) * PRICE_PER_KM;
+        return Math.round((r) * 100) / 100.0;
     }
 }

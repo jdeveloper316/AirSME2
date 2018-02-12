@@ -124,7 +124,7 @@ class GlobalTender {
             }.onchangeListener(), true);
         }
 
-        layout.removeAllViewsInLayout();
+        if(layout!=null)layout.removeAllViewsInLayout();
     }
 
     public void listenToAllTenders(){
@@ -167,11 +167,10 @@ class GlobalTender {
     public void handle(final Tender... tenders) {
         for(Tender t:tenders){
             final Tender tender=t;
-            Button infobtn = new Button(context);
-            infobtn.setText("Infor");
-            infobtn.setOnClickListener(new View.OnClickListener() {
+            layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     BTenderInfor.tender = tender;
                     if(isProxy)
                         Globals.nextView(context, PTenderInfor.class);
@@ -215,6 +214,7 @@ class GlobalTender {
                     }
                 });
             }
+
             LinearLayout lytrightbtns = new LinearLayout(context);
             lytrightbtns.setOrientation(LinearLayout.VERTICAL);
 
@@ -233,18 +233,19 @@ class GlobalTender {
             //Button b = new Button(this);
 
             RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    RelativeLayout.LayoutParams.MATCH_PARENT);
             rl.addRule(RelativeLayout.ALIGN_RIGHT);
-            infobtn.setLayoutParams(rl);
-            RelativeLayout rlytinfo=new RelativeLayout(context);
+            //infobtn.setLayoutParams(rl);
+            //RelativeLayout rlytinfo=new RelativeLayout(context);
             applybtn.setLayoutParams(rl);
             lytrightbtns.setLayoutParams(rl);
             RelativeLayout rlytapply=new RelativeLayout(context);
 
-            rlytinfo.addView(infobtn, wrapwrap);
+            new RoundViews(context).transparentYellow(applybtn);
+            //rlytinfo.addView(infobtn, wrapwrap);
             rlytapply.addView(applybtn, wrapwrap);
 
-            lytrightbtns.addView(rlytinfo, rl);
+            //lytrightbtns.addView(rlytinfo, rl);
             lytrightbtns.addView(rlytapply, rl);
             //lytrightbtns.setPadding(0,0,30,0);
 
@@ -266,6 +267,9 @@ class GlobalTender {
             daysleft.setText(df.format(tender.getDate()).toString());
             status.setText(tender.getTenderno());
 
+            new RoundViews(context).justwhitetext(tendername);
+            new RoundViews(context).justwhitetext(daysleft);
+            new RoundViews(context).justwhitetext(status);
 
             lyttendetails.addView(tendername, matchwrap);
             lyttendetails.addView(daysleft, matchwrap);
@@ -291,12 +295,16 @@ class GlobalTender {
             layout.setPadding(0,25,0,20);
             layout.addView(lytimg, matchwrap);
 
+            new RoundViews(context).round(layout);
+
+
             LinearLayout lastlayout = new LinearLayout(context);
 
             lastlayout.setOrientation(LinearLayout.VERTICAL);
             layout.addView(lastlayout, matchwrap);
             layout = lastlayout;
         }
+
     }
 
     public void applyTender(final Tender t){

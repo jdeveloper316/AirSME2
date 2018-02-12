@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airsme.datamodels.Tender;
@@ -50,6 +51,9 @@ public class PTenderInfor extends AppCompatActivity {
             }
         });
 
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.ptenderinfo_main));
+        getSupportActionBar().setTitle(tender.getName());
         tender=null;
         //new GlobalTender(this, (LinearLayout) findViewById(R.id.bdashboard_layout));
     }

@@ -11,9 +11,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airsme.datamodels.Business;
 import com.airsme.datamodels.Model;
 import com.airsme.datamodels.Proxy;
+import com.airsme.datamodels.Tender;
 import com.airsme.datamodels.User;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -58,8 +61,36 @@ public class Globals {
             c.startActivityForResult(intent, 1);
         }
     }
+    public static void showMapLocation(Activity c, Model model, boolean showonly, String locationtitle){
+
+        LatLng latLng=null;
+        if (model instanceof Tender) {
+            Tender t=((Tender) model);
+            latLng=t.jgetMaplocation();
+            locationtitle=t.getUnit()+" "+t.getBuilding()+" "+t.getStreet()+" "+t.getSurbub()+" "+t.getTown();
+        }
+        if (model instanceof Proxy) {
+            Proxy p=((Proxy) model);
+            latLng=p.jgetMaplocation();
+            locationtitle=p.getAddress();
+        }
+        if (model instanceof Business) {
+            Business b=((Business) model);
+            latLng=b.jgetMaplocation();
+            locationtitle="";
+        }
+
+
+
+        MapsMarkerActivity.latLngs=latLng;
+        MapsMarkerActivity.showonlys=showonly;
+        MapsMarkerActivity.locationtitles=locationtitle;
+
+        Globals.showMapLocation(c, null);
+    }
     public static void showprogress(Context context){
         if(!progressing) {
+            SplashScreen.showSplash(context);
             progressing = true;
             BaseActivity.getObj().setContext(context);
             BaseActivity.getObj().showProgressDialog();

@@ -9,6 +9,8 @@ android:paddingBottom="@dimen/activity_vertical_margin"
 android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
+android:id="@+id/signup_main"
+android:background="@drawable/techno"
 tools:context="com.airsme.airsme2.ChooseSignUp">
 
 <!-- Login progress -->
@@ -22,6 +24,7 @@ tools:context="com.airsme.airsme2.ChooseSignUp">
 
 <ScrollView
     android:id="@+id/login_form"
+    android:layout_marginTop="70dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -38,7 +41,7 @@ tools:context="com.airsme.airsme2.ChooseSignUp">
             <Spinner
                 android:id="@+id/account_type"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:hint="Account type"
                 android:inputType="text"
                 android:singleLine="true" />

@@ -149,6 +149,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
             }
         });
+
+        getSupportActionBar().hide();
  //facebook signin
 
         // Initialize Facebook Login button
@@ -190,7 +192,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 //Google sign in
         // Button listeners
-        findViewById(R.id.gsign_in_button).setOnClickListener(this);
+        View googlebtn=findViewById(R.id.gsign_in_button);
+        googlebtn.setOnClickListener(this);
 
         // [START config_signin]
         // Configure Google Sign In
@@ -208,6 +211,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         updateUI();
+
+        RoundViews r = new RoundViews(this);
+        r.round(mEmailSignInButton);
+        r.round(mPasswordView);
+        r.round(mEmailView);
+        //r.round(googlebtn);
+        //r.round(loginButton);
+        r.round(mEmailSignUpButton);
+
+        SplashScreen.showSplash(this);
     }// [START on_start_check_user]
     @Override
     public void onStart() {

@@ -152,7 +152,7 @@ public class Business extends Model {
     }
 
     public String getLogo() {
-        return logo;
+        return  "images/business/"+getPKeyValue();
     }
 
     public void setLogo(String logo) {

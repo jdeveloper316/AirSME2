@@ -10,6 +10,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/btenspec_main"
+    android:background="@drawable/yellowframes"
     tools:context="com.airsme.airsme2.BTenderSpecifics">
 
 <ProgressBar
@@ -129,13 +131,12 @@
                 android:layout_alignParentStart="true" />
 
             <Button
+                android:id="@+id/btn_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SELECT DATE"
-                android:id="@+id/btn_date"
-                android:layout_alignBottom="@+id/in_date"
-                android:layout_toRightOf="@+id/in_date"
-                android:layout_toEndOf="@+id/in_date" />
+                android:layout_above="@+id/in_time"
+                android:layout_toEndOf="@+id/in_date"
+                android:text="SELECT DATE" />
 
             <EditText
                 android:layout_width="200dp"
@@ -206,7 +207,9 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="32px"
+            android:paddingBottom="32px">
 
             <Spinner
                 android:id="@+id/courieroption"
@@ -215,6 +218,77 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/compulsorymeeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Compulsory meeting"/>
+
+        </android.support.design.widget.TextInputLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/compulsorymeetinglyt">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/compulsorymeetingin_date"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/compulsorymeetingbtn_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/compulsorymeetingin_time"
+                android:layout_toEndOf="@+id/compulsorymeetingin_date"
+                android:text="SELECT DATE" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/compulsorymeetingin_time"
+                android:layout_below="@+id/compulsorymeetingin_date"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELECT TIME"
+                android:id="@+id/compulsorymeetingbtn_time"
+                android:layout_below="@+id/compulsorymeetingbtn_date"
+                android:layout_alignLeft="@+id/compulsorymeetingbtn_date"
+                android:layout_alignStart="@+id/compulsorymeetingbtn_date" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/compulsorymeetingvenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Meeting venue"
+                android:inputType="textMultiLine" />
+
+        </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -8,6 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/login_main"
+    android:background="@drawable/stars"
     tools:context="com.airsme.airsme2.LoginActivity">
 
     <!-- Login progress -->
@@ -21,6 +23,7 @@
 
     <ScrollView
         android:id="@+id/login_form"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -69,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionUnspecified"
                 android:inputType="text"
+                android:textColor="@color/airsmeyellow"
                 android:text=""
                 android:maxLines="1"
                 android:singleLine="true" />
@@ -90,7 +94,7 @@
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/email_fb_sign_in_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="26dp"
                 android:layout_marginTop="16dp"
                 android:textStyle="bold" />
             <!--<com.twitter.sdk.android.core.identity.TwitterLoginButton

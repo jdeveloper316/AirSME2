@@ -90,17 +90,16 @@ class GlobalProxy {
     public void handle(final Proxy... proxys) {
         for(Proxy t:proxys){
             final Proxy proxy=t;
-            subject=map.get(proxy);
-            Button infobtn = new Button(context);
-            infobtn.setText("Infor");
-            infobtn.setOnClickListener(new View.OnClickListener() {
+            layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     BProxyInfor.proxy = proxy;
                     BProxyInfor.subject = subject;
-                        Globals.nextView(context, BProxyInfor.class);
+                    Globals.nextView(context, BProxyInfor.class);
                 }
             });
+            subject=map.get(proxy);
 
             final Button applybtn = new Button(context);
                 applybtn.setText("Chat");
@@ -132,13 +131,17 @@ class GlobalProxy {
             RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
             rl.addRule(RelativeLayout.ALIGN_RIGHT);
-            infobtn.setLayoutParams(rl);
+            //infobtn.setLayoutParams(rl);
             RelativeLayout rlytinfo=new RelativeLayout(context);
             applybtn.setLayoutParams(rl);
             lytrightbtns.setLayoutParams(rl);
             RelativeLayout rlytapply=new RelativeLayout(context);
 
-            rlytinfo.addView(infobtn, wrapwrap);
+
+
+            new RoundViews(context).transparentYellow(applybtn);
+
+            //rlytinfo.addView(infobtn, wrapwrap);
             rlytapply.addView(applybtn, wrapwrap);
 
             lytrightbtns.addView(rlytinfo, rl);
@@ -157,11 +160,17 @@ class GlobalProxy {
             TextView daysleft = new TextView(context);
             TextView status = new TextView(context);
 
-            tendername.setText(proxy.getName()+" "+proxy.getSurname());
+            tendername.setText(proxy.getName()+" ");
             tendername.setTextSize(24);
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
-            daysleft.setText(proxy.getEducation().toString());
-            status.setText(proxy.getProfession());
+            daysleft.setText(proxy.getProfession());
+            status.setText(MapsMarkerActivity.calculationByDistance(proxy.jgetMaplocation(), subject.jgetMaplocation())+"KM");
+
+
+
+            new RoundViews(context).justwhitetext(tendername);
+            new RoundViews(context).justwhitetext(daysleft);
+            new RoundViews(context).justwhitetext(status);
 
 
             lyttendetails.addView(tendername, matchwrap);

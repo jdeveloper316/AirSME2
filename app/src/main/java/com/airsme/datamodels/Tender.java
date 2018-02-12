@@ -27,13 +27,18 @@ public class Tender extends Model {
 
 
     private String status="Pending";
-    private String name="Tender name";
+    private String name="New Tender";
 
 
     private String notes;
     private String location;
     private String contactperson;
     private String courierOptions;
+
+    boolean compulsoryMeeting=false;
+    Date compulsoryMeetingDate;
+    String compulsoryMeetingVenue;
+
 
 
     private List<String> interests=new ArrayList<>();
@@ -74,10 +79,11 @@ public class Tender extends Model {
         this.town = town;
         this.contact = contact;
         this.email = email;
+        date=new Date();
     }
 
     public Tender() {
-
+        date=new Date();
     }
 
     public String getImageURL() {
@@ -245,6 +251,7 @@ public class Tender extends Model {
     }
 
     public LatLng jgetMaplocation() {
+        if(location==null) location="-33.9238445,18.4244628";
         String[] loc = location.replace("lat/lng: (", "").replace(")", "").split(",");
         return new LatLng(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
     }
@@ -259,6 +266,30 @@ public class Tender extends Model {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public boolean isCompulsoryMeeting() {
+        return compulsoryMeeting;
+    }
+
+    public void setCompulsoryMeeting(boolean compulsoryMeeting) {
+        this.compulsoryMeeting = compulsoryMeeting;
+    }
+
+    public Date getCompulsoryMeetingDate() {
+        return compulsoryMeetingDate;
+    }
+
+    public void setCompulsoryMeetingDate(Date compulsoryMeetingDate) {
+        this.compulsoryMeetingDate = compulsoryMeetingDate;
+    }
+
+    public String getCompulsoryMeetingVenue() {
+        return compulsoryMeetingVenue;
+    }
+
+    public void setCompulsoryMeetingVenue(String compulsoryMeetingVenue) {
+        this.compulsoryMeetingVenue = compulsoryMeetingVenue;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class BTenderInfor extends AppCompatActivity {
         ((Button) findViewById(R.id.btenderinfor_mapbtn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Globals.nextView(BTenderInfor.this, BDashboard.class);
+                Globals.showMapLocation(BTenderInfor.this, tender);
             }
         });
 
@@ -64,6 +64,9 @@ public class BTenderInfor extends AppCompatActivity {
                 Globals.nextView(BTenderInfor.this, BDashboard.class);
             }
         });
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bteninfo_main));
+        getSupportActionBar().setTitle(tender.getName());
 
         tender=null;
         //new GlobalTender(this, (LinearLayout) findViewById(R.id.bdashboard_layout));

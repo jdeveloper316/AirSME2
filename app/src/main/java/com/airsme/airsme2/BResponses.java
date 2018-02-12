@@ -20,6 +20,9 @@ public class BResponses extends AppCompatActivity {
         setContentView(R.layout.activity_bresponses);
         Globals.setDummycontext(this);
 
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.signup_main));
+        getSupportActionBar().setTitle("Responses");
+
         new GlobalProxy(this, (LinearLayout)findViewById(R.id.bresponses_layout), tender).listenResponses(tender);
     }
 

@@ -36,6 +36,12 @@ public class BDashboard extends AppCompatActivity {
                 business=dataSnapshot.getValue(Business.class);
             }
         }.onchangeListener());
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bdash_main));
+        //getSupportActionBar().hide();
+
+        getSupportActionBar().setTitle("Dashboard");
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bdash_main));
         new GlobalTender(this, (LinearLayout)findViewById(R.id.bdashboard_layout), false).listenMyBTenders();
     }
 

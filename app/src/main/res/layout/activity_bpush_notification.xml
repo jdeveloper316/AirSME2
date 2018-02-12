@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/bpush_main"
+    android:background="@drawable/yellowframes"
     tools:context="com.airsme.airsme2.BPushNotification">
 
 </android.support.constraint.ConstraintLayout>

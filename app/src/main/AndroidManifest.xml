@@ -3,6 +3,8 @@
     package="com.airsme.airsme2">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -19,9 +21,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <!--
-             The API key for Google Maps-based APIs.
-        -->
+        <!--              The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -59,8 +59,19 @@
         <activity android:name=".BTenderInfor" />
         <activity android:name=".PTenderInfor" />
         <activity android:name=".BResponses" />
-        <activity android:name=".Message"></activity>
-        <activity android:name=".MapsMarkerActivity"></activity>
+        <activity android:name=".Message" />
+        <activity android:name=".MapsMarkerActivity" />
+        <activity android:name=".ShoppingActivity" />
+        <activity android:name="com.mobile.connect.checkout.dialog.PWConnectCheckoutActivity" />
+        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ExecutePaymentFragment" />
+        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ChoosePaymentMethodFragment" />
+        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ReviewAccountFragment" />
+        <activity android:name="com.mobile.connect.checkout.meta.PWConnectCheckoutTransactionType" />
+        <activity
+            android:name=".SplashScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

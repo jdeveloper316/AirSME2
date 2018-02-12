@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -33,6 +36,8 @@ public class BTenderSpecifics extends AppCompatActivity implements
     Button btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    Calendar ccalendar=Calendar.getInstance();
+    private int cmYear, cmMonth, cmDay, cmHour, cmMinute;
     Calendar calendar=Calendar.getInstance();
 
 
@@ -41,6 +46,14 @@ public class BTenderSpecifics extends AppCompatActivity implements
     // Spinner Drop down elements
     List<String> beelevels = Arrays.asList("Postnet", "DHL", "Swift", "Post office");
 
+
+    EditText compulsoryvenue;
+    EditText compulsorytime;
+    EditText compulsorydate;
+    Button compulsorytimebtn;
+    Button compulsorydatebtn;
+    CheckBox compulsorymeeting;
+    LinearLayout compulsorylyt;
 
 
 
@@ -54,6 +67,7 @@ public class BTenderSpecifics extends AppCompatActivity implements
         setContentView(R.layout.activity_btender_specifics);
         addspinners();
 
+        compulsoryinit();
         imageView=findViewById(R.id.btender_imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +88,10 @@ public class BTenderSpecifics extends AppCompatActivity implements
             ((TextView) findViewById(R.id.contactperson)).setText(tender.getContactperson());
             ((TextView) findViewById(R.id.specialnotes)).setText(tender.getNotes());
             courieroptions.setSelection(beelevels.indexOf(tender.getCourierOptions()));
+
+            if(tender.isCompulsoryMeeting()){
+                compulsoryvenue.setText(tender.getCompulsoryMeetingVenue());
+            }
 
             new GlobalStorage(this).loadImage(tender.getImageURL(), imageView);
 
@@ -108,7 +126,27 @@ public class BTenderSpecifics extends AppCompatActivity implements
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
 
+        compulsorydatebtn=(Button)findViewById(R.id.compulsorymeetingbtn_date);
+        compulsorytimebtn=(Button)findViewById(R.id.compulsorymeetingbtn_time);
+        compulsorydate=(EditText)findViewById(R.id.compulsorymeetingin_date);
+        compulsorydate.setEnabled(false);
+        compulsorytime=(EditText)findViewById(R.id.compulsorymeetingin_time);
+        compulsorytime.setEnabled(false);
 
+        compulsorydatebtn.setOnClickListener(this);
+        compulsorytimebtn.setOnClickListener(this);
+
+
+        compulsorycheck();
+        compulsorymeeting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                compulsorycheck();
+            }
+        });
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.btenspec_main));
+        getSupportActionBar().setTitle(tender.getName());
         olddate();
     }
 
@@ -163,22 +201,87 @@ public class BTenderSpecifics extends AppCompatActivity implements
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-    }
-    public void olddate() {
+
+        if (v == compulsorydatebtn) {
 
             // Get Current Date
             final Calendar c = Calendar.getInstance();
-            c.setTime(tender.getDate());
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
+            cmYear = c.get(Calendar.YEAR);
+            cmMonth = c.get(Calendar.MONTH);
+            cmDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-            txtDate.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
 
-            txtTime.setText(mHour + ":" + mMinute);
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            compulsorydate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            ccalendar.set(Calendar.YEAR, year);
+                            ccalendar.set(Calendar.MONTH, monthOfYear);
+                            ccalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        }
+                    }, cmYear, cmMonth, cmDay);
+            datePickerDialog.show();
+        }
+        if (v == compulsorytimebtn) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            cmHour = c.get(Calendar.HOUR_OF_DAY);
+            cmMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            compulsorytime.setText(hourOfDay + ":" + minute);
+
+                            ccalendar.set(Calendar.MINUTE, minute);
+                            ccalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        }
+                    }, cmHour, cmMinute, false);
+            timePickerDialog.show();
+        }
+    }
+    public void olddate() {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        c.setTime(tender.getDate());
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+
+        txtDate.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
+
+        txtTime.setText(mHour + ":" + mMinute);
+    }
+    public void colddate() {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        c.setTime(tender.getDate());
+        cmYear = c.get(Calendar.YEAR);
+        cmMonth = c.get(Calendar.MONTH);
+        cmDay = c.get(Calendar.DAY_OF_MONTH);
+        cmHour = c.get(Calendar.HOUR_OF_DAY);
+        cmMinute = c.get(Calendar.MINUTE);
+
+
+        compulsorydate.setText(cmDay + "-" + (cmMonth + 1) + "-" + cmYear);
+
+        compulsorytime.setText(cmHour + ":" + cmMinute);
     }
 
     private void addspinners(){
@@ -286,6 +389,14 @@ public class BTenderSpecifics extends AppCompatActivity implements
 
         tender.setDate(calendar.getTime());
 
+
+        tender.setCompulsoryMeeting(compulsorymeeting.isChecked());
+
+        if(tender.isCompulsoryMeeting()){
+            tender.setCompulsoryMeetingDate(ccalendar.getTime());
+            tender.setCompulsoryMeetingVenue(compulsoryvenue.getText().toString());
+        }
+
         tender.setPKeyValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         DBUtil.createModel(tender);
@@ -318,5 +429,26 @@ public class BTenderSpecifics extends AppCompatActivity implements
                 e.printStackTrace();
             }
         }
+    }
+    protected void compulsorycheck() {
+        if(compulsorymeeting.isChecked()){
+            for( int i = 0; compulsorylyt!=null&&i < compulsorylyt.getChildCount(); i++ ){
+                compulsorylyt.getChildAt( i ).setVisibility(View.VISIBLE);
+            }
+        }
+        else{
+            for( int i = 0; compulsorylyt!=null&&i < compulsorylyt.getChildCount(); i++ ){
+                compulsorylyt.getChildAt( i ).setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+    protected void compulsoryinit() {
+        compulsorymeeting=findViewById(R.id.compulsorymeeting);
+        compulsorylyt=findViewById(R.id.compulsorymeetinglyt);
+        compulsorydatebtn=findViewById(R.id.compulsorymeetingbtn_date);
+        compulsorytimebtn=findViewById(R.id.compulsorymeetingbtn_time);
+        compulsorydate=findViewById(R.id.compulsorymeetingin_date);
+        compulsorytime=findViewById(R.id.compulsorymeetingin_time);
+        compulsoryvenue=findViewById(R.id.compulsorymeetingvenue);
     }
 }

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#efefef"
     android:orientation="vertical"
+    android:id="@+id/maps_main"
     tools:context=".MapsMarkerActivity">
     <!--<EditText
         android:hint="Search place"

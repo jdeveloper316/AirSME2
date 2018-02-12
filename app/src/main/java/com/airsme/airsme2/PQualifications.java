@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.airsme.datamodels.DBUtil;
@@ -70,6 +71,11 @@ public class PQualifications extends AppCompatActivity {
         transport.setAdapter(transportsa);
         employment.setAdapter(employmentsa);
         profession.setAdapter(professionsa);
+
+
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.pqual_main));
+        getSupportActionBar().setTitle("Qualifications");
 
     }
     private void submit(){

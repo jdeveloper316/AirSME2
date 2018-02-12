@@ -94,7 +94,7 @@ public class Proxy extends Model {
     }
 
     public String getPic() {
-        return pic;
+        return  "images/proxy/"+getPKeyValue();
     }
 
     public void setPic(String pic) {
@@ -266,10 +266,10 @@ public class Proxy extends Model {
     }
 
     public void setAppliedtenders(List<String> appliedtenders) {
-        this.appliedtenders = appliedtenders;
-    }
+        this.appliedtenders = appliedtenders;}
 
     public LatLng jgetMaplocation() {
+        if(location==null) location="-33.238445,18.4244628";
         String[] loc = location.replace("lat/lng: (", "").replace(")", "").split(",");
         return new LatLng(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
     }

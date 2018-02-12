@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -80,6 +81,9 @@ public class Message extends AppCompatActivity {
                 listView.setSelection(chatArrayAdapter.getCount() - 1);
             }
         });
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.msg_main));
+        getSupportActionBar().hide();
 
         getMsgs();
     }

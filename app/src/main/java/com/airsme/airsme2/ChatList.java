@@ -14,6 +14,9 @@ public class ChatList extends AppCompatActivity {
         setContentView(R.layout.activity_chat_list);
         Globals.setDummycontext(this);
 
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.chatlist_main));
+        getSupportActionBar().setTitle("Chats");
+
         new GlobalProxy(this, (LinearLayout)findViewById(R.id.bresponses_layout), null).listenResponses();
     }
 

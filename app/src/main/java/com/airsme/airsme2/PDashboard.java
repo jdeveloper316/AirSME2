@@ -19,6 +19,11 @@ public class PDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdashboard);
         Globals.setDummycontext(this);
+
+
+
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.pdash_main));
+        getSupportActionBar().setTitle("Dashboard");
         new GlobalTender(this, (LinearLayout)findViewById(R.id.pdashboard_layout), true).listenToAllTenders();
 
     }
