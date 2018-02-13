@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/techno"
     android:id="@+id/bdash_main"
+    android:theme="@style/MyEditText"
     tools:context="com.airsme.airsme2.BDashboard"
     android:orientation="vertical">
     <ScrollView

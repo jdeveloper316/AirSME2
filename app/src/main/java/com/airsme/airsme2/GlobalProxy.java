@@ -197,6 +197,9 @@ class GlobalProxy {
             layout.setPadding(0,25,0,20);
             layout.addView(lytimg, matchwrap);
 
+
+            new RoundViews(context).round(layout);
+
             LinearLayout lastlayout = new LinearLayout(context);
 
             lastlayout.setOrientation(LinearLayout.VERTICAL);

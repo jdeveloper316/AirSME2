@@ -87,6 +87,11 @@ public class SplashScreen extends AppCompatActivity {
         }
     };
 
+    public SplashScreen() {
+        super();
+        currentcontext=this;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +172,10 @@ public class SplashScreen extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
     public static void showSplash(Context context) {
+        if(Globals.CURRENT_USER==null){
+            Globals.nextView(context, LoginActivity.class);
+            return;
+        }
         Globals.nextView(context, SplashScreen.class);
     }
     public static void hideSplash(Class c) {

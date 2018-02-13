@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/msg_main"
+    android:theme="@style/MyEditText"
     android:background="@drawable/yellowframes"
     tools:context=".Message">
 

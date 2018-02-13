@@ -86,6 +86,16 @@ public class RoundViews {
 
     }
 
+    public void justwhitetextyelobg(TextView v) {
+
+        v.setTextColor(ResourcesCompat.getColor(c.getResources(), R.color.airsmeyellow, null));
+        v.setHintTextColor(ResourcesCompat.getColor(c.getResources(), R.color.airsmeyellow, null));
+        //v.setBackgroundColor(ResourcesCompat.getColor(c.getResources(), R.color.airsmeyellow, null));
+        //v.setShadowColor(Color.WHITE);
+        //justtransparent(v);
+
+    }
+
     public void round(Button v) {
 
         v.setTextColor(ResourcesCompat.getColor(c.getResources(), R.color.airsmeyellow, null));
@@ -111,6 +121,13 @@ public class RoundViews {
             e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
             return;
         }
+        if(v instanceof Spinner){
+            Spinner e=(Spinner)v;
+            e.setBackgroundColor(Color.TRANSPARENT);
+            //e.setHintTextColor(Color.WHITE);
+            //e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
+            return;
+        }
         roundcolored(v, Color.GRAY);
 
     }
@@ -118,8 +135,8 @@ public class RoundViews {
     public void round(EditText v) {
 
         //v.setPadding(36, 36, 36, 36);
-        //v.setTextColor(Color.WHITE);
-        //v.setHintTextColor(Color.WHITE);
+        v.setTextColor(Color.WHITE);
+        v.setHintTextColor(Color.WHITE);
         v.setBackgroundColor(Color.TRANSPARENT);
         //roundcolored(v, Color.GRAY);
 

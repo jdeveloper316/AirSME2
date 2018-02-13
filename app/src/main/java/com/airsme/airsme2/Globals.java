@@ -90,7 +90,7 @@ public class Globals {
     }
     public static void showprogress(Context context){
         if(!progressing) {
-            SplashScreen.showSplash(context);
+            //SplashScreen.showSplash(context);
             progressing = true;
             BaseActivity.getObj().setContext(context);
             BaseActivity.getObj().showProgressDialog();

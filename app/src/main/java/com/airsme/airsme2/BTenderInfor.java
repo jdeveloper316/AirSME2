@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +21,28 @@ public class BTenderInfor extends AppCompatActivity {
         setContentView(R.layout.activity_btender_infor);
 
         final Tender ten=tender;
-        ((TextView) findViewById(R.id.btenderinfor_details)).setText(tender.toPrint());
-        ((TextView) findViewById(R.id.btenderinfor_specialnotes)).setText(tender.getNotes());
+        TextView name=findViewById(R.id.tname);
+        name.setEnabled(false);
+        name.setText(tender.getName());
+        TextView edu=findViewById(R.id.ttown);
+        edu.setEnabled(false);
+        edu.setText(tender.getTown());
+        TextView lang=findViewById(R.id.tdate);
+        lang.setEnabled(false);
+        lang.setText(tender.getDate().toString());
+        TextView prof=findViewById(R.id.taddress);
+        prof.setEnabled(false);
+        prof.setText(tender.getBuilding());
+
+
+        ImageView profile = findViewById(R.id.timage);
+        profile.setPadding(0,0,0,0);
+        //prof.setCropToPadding(true);
+        profile.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+        new GlobalStorage(this).loadImage(tender.getImageURL(), profile);
+
+        //((TextView) findViewById(R.id.btenderinfor_details)).setText(tender.toPrint());
+        ((TextView) findViewById(R.id.btenderinfor_details)).setText(tender.getNotes());
 
 
         ((Button) findViewById(R.id.btenderinfor_mapbtn)).setOnClickListener(new View.OnClickListener() {

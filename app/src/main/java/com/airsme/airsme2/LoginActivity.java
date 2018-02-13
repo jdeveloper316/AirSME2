@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -153,10 +154,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getSupportActionBar().hide();
  //facebook signin
 
-        // Initialize Facebook Login button
+        /*// Initialize Facebook Login button
         CallbackManager mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton)findViewById(R.id.email_fb_sign_in_button);
         loginButton.setReadPermissions("email", "public_profile");
+
+
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -214,13 +217,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         RoundViews r = new RoundViews(this);
         r.round(mEmailSignInButton);
-        r.round(mPasswordView);
-        r.round(mEmailView);
+        r.justwhitetextyelobg((EditText) mPasswordView);
+        r.justwhitetextyelobg((EditText) mEmailView);
         //r.round(googlebtn);
         //r.round(loginButton);
         r.round(mEmailSignUpButton);
+        //r.round();
 
-        SplashScreen.showSplash(this);
+        //new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.login_main));
+        if (mAuthTask != null) {
+            SplashScreen.showSplash(this);
+                   }
+
     }// [START on_start_check_user]
     @Override
     public void onStart() {

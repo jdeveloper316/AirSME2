@@ -11,6 +11,7 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:background="@drawable/yellowframes"
 android:id="@+id/successmsg_main"
+    android:theme="@style/MyEditText"
 tools:context="com.airsme.airsme2.SuccessMessage">
 
 <ProgressBar

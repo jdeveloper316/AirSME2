@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/login_main"
-    android:background="@drawable/stars"
+    android:theme="@style/MyEditText"
+    android:background="@drawable/o_small"
     tools:context="com.airsme.airsme2.LoginActivity">
 
     <!-- Login progress -->
@@ -25,12 +26,15 @@
         android:id="@+id/login_form"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/download"
+        >
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="32px"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -44,7 +48,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:shadowColor="#ffffff"
+                    android:textColorHint="#ffffff"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -58,11 +63,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -75,28 +78,28 @@
                 android:textColor="@color/airsmeyellow"
                 android:text=""
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in_short"
                 android:textStyle="bold" />
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/gsign_in_button"
                 android:layout_width="match_parent"
+                android:layout_height="55dp"
                 android:layout_marginTop="16dp"
-                android:text="Sign in with google"
-                android:layout_height="wrap_content" />
+                android:text="Sign in with google" />
 
-            <com.facebook.login.widget.LoginButton
+           <!-- <com.facebook.login.widget.LoginButton
                 android:id="@+id/email_fb_sign_in_button"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="55dp"
                 android:layout_marginTop="16dp"
-                android:textStyle="bold" />
+                 />-->
             <!--<com.twitter.sdk.android.core.identity.TwitterLoginButton
                 android:id="@+id/button_twitter_login"
                 android:layout_width="match_parent"
@@ -106,7 +109,8 @@
                 android:id="@+id/email_sign_up_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+
                 android:layout_marginTop="16dp"
                 android:text="Signup"
                 android:textStyle="bold" />

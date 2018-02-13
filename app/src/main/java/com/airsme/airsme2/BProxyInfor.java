@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,10 +38,29 @@ public class BProxyInfor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bproxy_infor);
 
-        TextView t=findViewById(R.id.bproxy_infor_text);
-        t.setEnabled(false);
-        t.setText(proxy.toString());
+        TextView name=findViewById(R.id.pname);
+        name.setEnabled(false);
+        name.setText(proxy.getTitle()+" "+proxy.getName()+" "+proxy.getSurname());
+        TextView edu=findViewById(R.id.peducation);
+        edu.setEnabled(false);
+        edu.setText(proxy.getEducation());
+        TextView lang=findViewById(R.id.planguages);
+        lang.setEnabled(false);
+        lang.setText(proxy.getLanguages());
+        TextView prof=findViewById(R.id.pprofesion);
+        prof.setEnabled(false);
+        prof.setText(proxy.getProfession());
+        TextView about=findViewById(R.id.bproxy_infor_text);
+        about.setEnabled(false);
+        about.setText(proxy.getAboutme());
         Button b=findViewById(R.id.bproxy_infor_paymentbtn);
+
+        ImageView profile = findViewById(R.id.pimage);
+        profile.setPadding(0,0,0,0);
+        //prof.setCropToPadding(true);
+        profile.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+        new GlobalStorage(this).loadImage(proxy.getPic(), profile);
+
         b.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -48,7 +68,7 @@ public class BProxyInfor extends AppCompatActivity {
            }
        });
 
-        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bproxyreq_main));
+        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.bproxyinfor_main));
         getSupportActionBar().setTitle(proxy.getName());
     }
     /*private void pay2(){

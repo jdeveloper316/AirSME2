@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bresponses_main"
+    android:theme="@style/MyEditText"
     android:background="@drawable/yellowframes"
     tools:context="com.airsme.airsme2.BResponses"
     android:orientation="vertical">

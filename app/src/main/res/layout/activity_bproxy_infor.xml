@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/bproxyinfor_main"
     android:background="@drawable/download"
+    android:theme="@style/MyEditText"
     tools:context="com.airsme.airsme2.BProxyInfor">
 
 
@@ -33,7 +34,6 @@
             android:id="@+id/pimage"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:background="@drawable/download"
             android:gravity="bottom"
             android:baselineAlignBottom="true"
              />
@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:text="Name"
@@ -66,7 +66,7 @@
             android:id="@+id/pname"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:text="Education"
@@ -74,7 +74,7 @@
             android:id="@+id/peducation"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:text="English"
@@ -82,7 +82,7 @@
             android:id="@+id/planguages"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:text="Profession"
@@ -96,7 +96,7 @@
                 <TextView
                     android:id="@+id/bproxy_infor_text"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="70dp"
                     android:text="Special notes"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
