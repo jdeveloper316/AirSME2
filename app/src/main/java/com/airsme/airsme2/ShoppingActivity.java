@@ -35,7 +35,7 @@ public class ShoppingActivity extends Activity {
     public static final String ACCOUNTS = "ACCOUNTS";
 
 	private static final String APPLICATIONIDENTIFIER = "payworks.swipeandbuy";
-	private static final String PROFILETOKEN = "5644a34583fc49da87892843aa8fb27b";
+	private static final String PROFILETOKEN = "8a82941861898e3c016189984c690030";
 
 
 	private PWProviderBinder _binder;
@@ -119,10 +119,7 @@ public class ShoppingActivity extends Activity {
 					accounts = _binder.getAccountFactory().deserializeAccountList(sharedSettings.getString(ACCOUNTS, _binder.getAccountFactory().serializeAccountList(new ArrayList<PWAccount>())));
 					settings.setPaymentAmount(66);
 
-					System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj acc"+""+settings.setStoredAccounts(accounts).describeContents());
-					System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj vat"+settings.getPaymentVATAmount());
-					System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj amt"+settings.getPaymentAmount());
-					System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj vat"+settings.getPaymentVATAmount());
+
 
 					i.putExtra(PWConnectCheckoutActivity.CONNECT_CHECKOUT_SETTINGS, settings);
 					i.putExtra(PWConnectCheckoutActivity.CONNECT_CHECKOUT_GENERIC_PAYMENT_PARAMS, genericParams);
