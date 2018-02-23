@@ -40,7 +40,6 @@
         <activity android:name=".TermsAndConditions" />
         <activity android:name=".SuccessMessage" />
         <activity android:name=".BDashboard" />
-        <activity android:name=".TenderDate" />
         <activity android:name=".BTenderSpecifics" />
         <activity android:name=".BProxyRequirements" />
         <activity android:name=".PDashboard" />
@@ -63,10 +62,6 @@
         <activity android:name=".MapsMarkerActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name="com.mobile.connect.checkout.dialog.PWConnectCheckoutActivity" />
-        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ExecutePaymentFragment" />
-        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ChoosePaymentMethodFragment" />
-        <activity android:name="com.mobile.connect.checkout.dialog.fragment.ReviewAccountFragment" />
-        <activity android:name="com.mobile.connect.checkout.meta.PWConnectCheckoutTransactionType" />
         <activity
             android:name=".SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"

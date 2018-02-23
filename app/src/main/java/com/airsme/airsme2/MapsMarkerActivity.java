@@ -148,7 +148,7 @@ public class MapsMarkerActivity extends AppCompatActivity
         lastmark=mMap.addMarker(mo);
         if(movecamera)mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
-public static final double PRICE_PER_KM=5;
+public static final double PRICE_PER_KM=0.65;//dollars not rands
     public static double calculationByDistance(LatLng StartP, LatLng EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.latitude;
