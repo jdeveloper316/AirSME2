@@ -192,8 +192,10 @@ class GlobalTender {
             }
             else{
                 applybtn.setText("Apply");
+                PTenderInfor.tender = tender;
                 if(Globals.CURRENT_PROXY.getAppliedtenders().contains(tender.getUniqueLongTenderno())){
                     applybtn.setEnabled(false);
+                    applybtn.setText("");
                 }
                 else{
                     applybtn.setEnabled(true);
@@ -203,6 +205,7 @@ class GlobalTender {
                     public void onClick(View view) {
                         applyTender(tender);
                         applybtn.setEnabled(false);
+                        applybtn.setText("");
                         //likeTender(tender, applybtn.getText().toString().equalsIgnoreCase("Like"));
                         //if(Globals.CURRENT_PROXY.getAppliedtenders().contains(tender.getUniqueLongTenderno())){
                         //    applybtn.setEnabled(false);

@@ -138,7 +138,6 @@ public class DBUtil {
 
         else {
             dinosaursRef.orderByChild(m.getPKeyValue()).addListenerForSingleValueEvent(cl);
-
         }
 
     }

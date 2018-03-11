@@ -78,7 +78,8 @@ tools:context="com.airsme.airsme2.BIndividual">
             <Spinner
                 android:id="@+id/position"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/airsmespinnerback" />
 
         </android.support.design.widget.TextInputLayout>
 

@@ -11,6 +11,7 @@ package com.airsme.airsme2;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.Button;
+        import android.widget.CheckBox;
         import android.widget.EditText;
         import android.widget.LinearLayout;
         import android.widget.Spinner;
@@ -121,9 +122,26 @@ public class RoundViews {
             e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
             return;
         }
+        if(v instanceof Button){
+            Button e=(Button)v;
+            e.setTextColor(Color.WHITE);
+            e.setHintTextColor(Color.WHITE);
+            roundcolored(v, Color.GRAY);
+            //e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
+            return;
+        }
+        if(v instanceof CheckBox){
+            CheckBox e=(CheckBox)v;
+            e.setTextColor(Color.WHITE);
+            e.setHintTextColor(Color.WHITE);
+            roundcolored(v, Color.GRAY);
+            //e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
+            return;
+        }
         if(v instanceof Spinner){
             Spinner e=(Spinner)v;
             e.setBackgroundColor(Color.TRANSPARENT);
+
             //e.setHintTextColor(Color.WHITE);
             //e.getBackground().mutate().setColorFilter(this.c.getResources().getColor(android.R.color.holo_orange_light), PorterDuff.Mode.SRC_ATOP);
             return;

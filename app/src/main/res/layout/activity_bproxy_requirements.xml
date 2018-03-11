@@ -40,7 +40,8 @@ tools:context="com.airsme.airsme2.BProxyRequirements">
             <Spinner
                 android:id="@+id/industry"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/airsmespinnerback" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -51,7 +52,8 @@ tools:context="com.airsme.airsme2.BProxyRequirements">
             <Spinner
                 android:id="@+id/qualification"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/airsmespinnerback" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -62,7 +64,8 @@ tools:context="com.airsme.airsme2.BProxyRequirements">
             <Spinner
                 android:id="@+id/language"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/airsmespinnerback" />
 
         </android.support.design.widget.TextInputLayout>
 

@@ -111,7 +111,8 @@ tools:context="com.airsme.airsme2.BSignup">
                 android:layout_height="wrap_content"
                 android:hint="BEE Level"
                 android:inputType="text"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:popupBackground="@color/airsmespinnerback" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -138,7 +139,8 @@ tools:context="com.airsme.airsme2.BSignup">
                 android:layout_height="wrap_content"
                 android:hint="Type"
                 android:inputType="text"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:popupBackground="@color/airsmespinnerback" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -151,7 +153,8 @@ tools:context="com.airsme.airsme2.BSignup">
                 android:layout_height="wrap_content"
                 android:hint="Size"
                 android:inputType="text"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:popupBackground="@color/airsmespinnerback" />
         </android.support.design.widget.TextInputLayout>
 
 

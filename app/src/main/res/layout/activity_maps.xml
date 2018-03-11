@@ -5,7 +5,6 @@
     android:background="#efefef"
     android:orientation="vertical"
     android:id="@+id/maps_main"
-    android:theme="@style/MyEditText"
     tools:context=".MapsMarkerActivity">
     <!--<EditText
         android:hint="Search place"
@@ -16,7 +15,9 @@
         android:text="Done"
         android:id="@+id/marklocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/com_facebook_blue"
+        android:textColor="#ffffff"/>
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

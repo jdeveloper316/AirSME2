@@ -53,9 +53,10 @@ public class JNavigate {
                 @Override
                 public void methodHolder(DataSnapshot dataSnapshot) {
                     User u = dataSnapshot.getValue(User.class);
+                    System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy______"+dataSnapshot.getRef().toString());
                     Globals.CURRENT_USER=u;
-                    if(u==null)return;
                     USER=u;
+                    if(u==null)return;
                     if(u.isRegistered()){
 
                         if(User.PROXY.equalsIgnoreCase(u.getRoles())){
@@ -76,6 +77,7 @@ public class JNavigate {
                 }
             };
             DBUtil.retriaveModelByKey(user, lmp.onchangeListener());
+
         }
         else{//else login
             login(context);

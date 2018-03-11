@@ -37,7 +37,11 @@ public class GlobalMenus extends Activity{
                 new GlobalTender(context, layout[0], isProxy).listenToAppliedTenders(BDashboard.business);
                 return true;*/
             case R.id.mytenders:
-                new GlobalTender(context, layout[0], isProxy).listenMyTenders();
+                if(Globals.CURRENT_PROXY!=null){
+                    new GlobalTender(context, layout[0], isProxy).listenMyTenders();
+                    return true;
+                }
+                new GlobalTender(context, layout[0], isProxy).listenMyBTenders();
                 return true;
             case R.id.addtender:
                 Globals.nextView(context, BTenderSpecifics.class);

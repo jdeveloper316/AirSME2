@@ -81,7 +81,7 @@ public class MapsMarkerActivity extends AppCompatActivity
             }
         });
 
-        new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.maps_main));
+        //new RoundViews(this).themeControls((LinearLayout) findViewById(R.id.maps_main));
         getSupportActionBar().hide();
     }
 
@@ -124,7 +124,7 @@ public class MapsMarkerActivity extends AppCompatActivity
                         myLocation.getLongitude());
 
                 CameraPosition myPosition = new CameraPosition.Builder()
-                        .target(myLatLng).zoom(17).bearing(90).tilt(30).build();
+                        .target(myLatLng).zoom(100).bearing(90).tilt(30).build();
                 googleMap.animateCamera(
                         CameraUpdateFactory.newCameraPosition(myPosition));
             }
@@ -145,7 +145,10 @@ public class MapsMarkerActivity extends AppCompatActivity
         this.latLng=latLng;
         if(lastmark!=null){lastmark.remove();}
         MarkerOptions mo=new MarkerOptions().position(latLng).title(title);
+
         lastmark=mMap.addMarker(mo);
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 100.0f ) );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
         if(movecamera)mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 public static final double PRICE_PER_KM=0.65;//dollars not rands
